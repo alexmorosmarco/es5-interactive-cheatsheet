@@ -1,15 +1,14 @@
 /********************
  ** Amm JS library **
  ********************/
-
 // Library singleton definition
 if (typeof Amm == 'undefined') {
   var Amm = {};
   Amm.Util = {
-    log: function (tag, msg) {
-      if(arguments.length==2){
+    log: function(tag, msg) {
+      if (arguments.length == 2) {
         msg = tag + ': ' + msg;
-      }else{
+      } else {
         msg = tag;
       }
       var currentTime = Date();
