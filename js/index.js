@@ -24,7 +24,7 @@
  ** SHOW INFO **
  ***************/
 
-//Usa un párrafo para mostrar mensajes al usuario
+//Usa un parrafo para mostrar mensajes al usuario
 function warnUser(){
   document.getElementById('userWarn').innerHTML = 'Rellene correctamente los campos '+Date();
 }
@@ -49,7 +49,7 @@ function writeToConsole (tag, msg){
  **************/
 
 function tryConfirmBox() {
-  if (window.confirm("Selecciona una opción!") == true) {
+  if (window.confirm("Selecciona una opcion!") == true) {
     writeToConsole("Has pulsado Aceptar");
   } else {
     writeToConsole("Has cancelado");
@@ -331,15 +331,15 @@ function testPatterns(){
  **************/
 
 function testClosure() {
-    //Ejemplo práctico de Closure: Acceso desde miembros privados a miembros públicos
+    //Ejemplo practico de Closure: Acceso desde miembros privados a miembros publicos
     function Constructor (msjPrivado, msjPublico) {
         var propiedadPrivada = msjPrivado;
         this.propiedadPublica = msjPublico;
         var that = this;
-        /* La variable 'that' será guardada en el closure para ser 
-           utilizada en su momento por la función metodoPrivado() 
-           ya que los métodos privados no pueden acceder a métodos
-           públicos porque en ese caso 'this' representa a 'Window'*/
+        /* La variable 'that' sera guardada en el closure para ser 
+           utilizada en su momento por la funcion metodoPrivado() 
+           ya que los metodos privados no pueden acceder a metodos
+           publicos porque en ese caso 'this' representa a 'Window'*/
         var metodoPrivado = function () {
             writeToConsole('CLOSURE',propiedadPrivada);
             writeToConsole('CLOSURE',that.propiedadPublica);
@@ -361,7 +361,7 @@ function testTryCatch(){
   try {
     //Error: hay una 'd' que sobra
     //adddlert("Welcome guest!");
-    //Así se lanza un throw. Admite String, Number, Boolean o Object.
+    //Asi se lanza un throw. Admite String, Number, Boolean o Object.
     throw "Too big";    // throw a text
     //throw 500;          // throw a number
   } catch(err) {
