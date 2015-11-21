@@ -3,18 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>ES5 interactive cheat sheet</title>
+    <link rel="stylesheet" href="css/index.css">
   </head>
   <body>
-    <div>
       <h3>PRUEBAS DE FEEDBACK AL USUARIO: mensaje, alerts, prompts</h3>
+    <section>
       <p id="userWarn">Bloque para mostrar mensajes</p>
       <button type="button" onclick="warnUser()">Advertir al usuario</button>
       <button type="button" onclick="warnUserWithAlert('Cuidao!')">Advertir al usuario con un alert</button>
       <button type="button" onclick="writeToConsole('Mensaje de prueba')">Escribir por consola</button>
       <button onclick="tryConfirmBox()">Testear los "Confirm Box"</button>
       <button onclick="tryPromptBox()">Testear los "Prompt Box"</button>
-    </div>
-    <div>
+    </section>
+    <section>
       <h3>PRUEBAS DE TIPOS DE DATOS, FUNCIONES, OBJETOS...</h3>
       <button type="button" onclick="testTypes()">Escribir por consola algunos tipos de datos</button>
       <button type="button" onclick="testObjects()">Test objects</button>
@@ -22,22 +23,22 @@
       <button type="button" onclick="testPatterns()">Test patterns</button>
       <button type="button" onclick="testInheritance()">Test inheritance</button>
       <button type="button" onclick="testTryCatch()">Testear Try/Catch</button>
-    </div>
-    <div><h3>PRUEBAS DE COOKIES</h3>
+    </section>
+    <section><h3>PRUEBAS DE COOKIES</h3>
       <p id="micookie">Cookie vacia</p>
       <button onclick="readCookie()">Cookie: leer</button>
       <button onclick="createCookie()">Cookie: crear</button>
       <button onclick="createCookie2()">Cookie: crear otro mas</button>
-    </div>
-    <div>
+    </section>
+    <section>
       <h3>NAVIGATION TESTS</h3>
       <button onclick="gotoOtherSite()">Go to other site</button>
-    </div>
-    <div>
+    </section>
+    <section>
       <h3>NAMESPACES TESTS</h3>
       <button id="btUseNamespace">Use code from a custom namespace</button>
-    </div>
-    <div>
+    </section>
+    <section>
       <h3>XMLHttpRequest TESTS</h3>
       <button onclick="xhrSyncCORSFromDifferentOrigin()">Synchronous call from different Origin (will fail because of same-origin policy)</button>
       <button onclick="xhrSyncCORSThroughReverseProxy()">Synchronous call using CORS Reverse Proxy</button>
@@ -45,7 +46,7 @@
       <div>
         <button onclick="xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
       </div>
-    </div>
+    </section>
     <!-- ECMAScript -->
     <script src="js/index.js"></script>
     <script src="js/inheritance.js"></script>
