@@ -281,17 +281,3 @@ function testPatterns() {
   var anyCalculator = getCalculator();
   var anyCalculator2 = getCalculator();
 }
-/**************
- * EXCEPTIONS *
- **************/
-function testTryCatch() {
-  try {
-    //Error: hay una 'd' que sobra
-    //adddlert("Welcome guest!");
-    //Asi se lanza un throw. Admite String, Number, Boolean o Object.
-    throw "Too big"; // throw a text
-    //throw 500;          // throw a number
-  } catch (err) {
-    writeToConsole('Catch alcanzado capturando el siguient error: ' + err);
-  }
-}
