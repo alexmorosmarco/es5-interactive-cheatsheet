@@ -299,20 +299,32 @@ function testClosure() {
   obj.metodoPublico();
 }
 /**************
- * EXCEPTIONS *
+ * STATEMENTS *
  **************/
-function testTryCatch() {
+function testExceptions() {
   try {
-    //Error: hay una 'd' que sobra
+    // Exception: there are some extra 'd's
     //adddlert("Welcome guest!");
-    //Asi se lanza un throw. Admite String, Number, Boolean o Object.
-    throw "Too big"; // throw a text
-    //throw 500;          // throw a number
-  } catch (err) {
-    writeToConsole('Catch alcanzado capturando el siguient error: ' + err);
+    // How to throw an exception. It allows String, Number, Boolean or Object
+    // and what is thrown is what is caught in the "exception" parameter.
+    //throw "Too big"; // Throws a text
+    //throw 500; // Throws a number
+    //throw {firstName: "Alex", secondName: "Moros"}; // Throws an object
+    throw new Error('Some error happened!');
+    //throw new SyntaxError('Some error happened!');
+    //throw new DOMException('DOM exception!!!');
+  } catch (exception) {
+    if (exception instanceof SyntaxError) {
+      writeToConsole('SyntaxError caught with name "' + exception.name + '" and message "' + exception.message + '"');
+    } else if (exception instanceof Error) {
+      writeToConsole('Error caught with name "' + exception.name + '" and message "' + exception.message + '"');
+    } else {
+      writeToConsole('Exception caught with following message: ' + exception);
+    }
+  } finally {
+    writeToConsole('End of try-catch (allways executes)');
   }
 }
-
 /****************
  ** NAVIGATION **
  ****************/
