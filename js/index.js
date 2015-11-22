@@ -17,12 +17,6 @@
   // Worse alternative cause it replaces any previously registered listener
   //window.onload = onLoaded;
 }());
-/****************
- ** NAVIGATION **
- ****************/
-function gotoOtherSite() {
-  location.href = "http://www.google.es"
-}
 /**************
  * STATEMENTS *
  **************/
@@ -55,4 +49,10 @@ function testExceptions() {
  ****************/
 function useNamespace() {
   Amm.Util.log('Namespace', 'using a custom namespace...');
+}
+/****************
+ ** NAVIGATION **
+ ****************/
+function gotoOtherSite() {
+  location.href = "http://www.google.es"
 }

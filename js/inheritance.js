@@ -1,4 +1,3 @@
-//Start in strict mode so that non-defined variables give an error.
 "use strict";
 /*  IMPORTANT NOTES ABOUT JAVASCRIPT AND INHERITANCE:
     -Prototype based patterns allow to consume less memory, so that it lets

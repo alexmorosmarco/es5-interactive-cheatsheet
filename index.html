@@ -17,27 +17,16 @@
       <button onclick="writeToConsole('Warning the user via console')">Through the console</button>
     </section>
     <section>
-      <h3>PRUEBAS DE TIPOS DE DATOS, FUNCIONES, OBJETOS...</h3>
-      <button type="button" onclick="testTypes()">Escribir por consola algunos tipos de datos</button>
-      <button type="button" onclick="testObjects()">Test objects</button>
-      <button type="button" onclick="testClosure()">Test closure</button>
-      <button type="button" onclick="testPatterns()">Test patterns</button>
-      <button type="button" onclick="testInheritance()">Test inheritance</button>
+      <h3>DATA TYPES</h3>
+      <button onclick="testTypes()">Types and "typeof"</button>
+      <button onclick="testObjects()">Object constructors</button>
+      <button onclick="testClosure()">Closures</button>
+      <button onclick="testPatterns()">OO Patterns</button>
+      <button onclick="testInheritance()">Inheritance</button>
     </section>
     <section>
       <h3>STATEMENTS</h3>
       <button onclick="testExceptions()">Exceptions</button>
-    </section>
-    <section>
-      <h3>COOKIES</h3>
-      <p id="cookieInfo">[Area to show cookies]</p>
-      <button onclick="readCookie()">Read cookies</button>
-      <button onclick="createCookie()">Create one cookie</button>
-      <button onclick="createCookie2()">Create one more cookie</button>
-    </section>
-    <section>
-      <h3>NAVIGATION</h3>
-      <button onclick="gotoOtherSite()">Go to other site</button>
     </section>
     <section>
       <h3>NAMESPACES TESTS</h3>
@@ -52,13 +41,24 @@
         <button onclick="xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
       </div>
     </section>
+    <section>
+      <h3>COOKIES</h3>
+      <p id="cookieInfo">[Area to show cookies]</p>
+      <button onclick="readCookie()">Read cookies</button>
+      <button onclick="createCookie()">Create one cookie</button>
+      <button onclick="createCookie2()">Create one more cookie</button>
+    </section>
+    <section>
+      <h3>NAVIGATION</h3>
+      <button onclick="gotoOtherSite()">Go to other site</button>
+    </section>
     <!-- ECMAScript -->
     <script src="js/index.js"></script>
     <script src="js/feedback.js"></script>
     <script src="js/objects.js"></script>
     <script src="js/inheritance.js"></script>
-    <script src="js/cookies.js"></script>
     <script src="js/amm/amm.js"></script>
     <script src="js/xhr.js"></script>
+    <script src="js/cookies.js"></script>
   </body>
 </html>
