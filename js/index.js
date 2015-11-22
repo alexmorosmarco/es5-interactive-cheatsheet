@@ -17,41 +17,6 @@
   // Worse alternative cause it replaces any previously registered listener
   //window.onload = onLoaded;
 }());
-/*******************************
- ** GIVE FEEDBACK TO THE USER **
- *******************************/
-function warnUserWithHTML() {
-  document.getElementById('warnMessage').innerHTML = 'Please, properly fill the field. Current time: ' + Date();
-}
-
-function warnUserWithAlert(msg) {
-  alert(msg);
-}
-
-function warnUserWithConfirmBox() {
-  if (window.confirm("Choose an option!") == true) {
-    writeToConsole("You have pressed Accept");
-  } else {
-    writeToConsole("You have pressed Cancel");
-  }
-}
-
-function warnUserWithPromptBox() {
-  var person = window.prompt("Please enter your name", "Alex Moros Marco");
-  if (person != null) {
-    writeToConsole('Written text in the prompt: ' + person);
-  }
-}
-
-function writeToConsole(tag, msg) {
-  if (arguments.length == 2) {
-    msg = tag + ': ' + msg;
-  } else {
-    msg = tag;
-  }
-  var currentTime = Date();
-  console.log(currentTime + " '" + msg + "'");
-}
 /***********
  ** TYPES **
  ***********/
@@ -62,12 +27,18 @@ function testTypes() {
     lastName: "Moros"
   };
   var num;
+  var f = function() {};
   console.log(array);
   console.log(array[0]);
   console.log(object);
   console.log(object.lastName);
+  console.log(object['lastName']);
+  console.log(f);
+  console.log(num);
   console.log(typeof array);
+  console.log(typeof object);
   console.log(typeof object.lastName);
+  console.log(typeof f);
   console.log(typeof num);
 }
 /*************
@@ -341,26 +312,7 @@ function testTryCatch() {
     writeToConsole('Catch alcanzado capturando el siguient error: ' + err);
   }
 }
-/**************
- ** COOKIES  **
- **************/
-function readCookie() {
-  var c = window.document.cookie;
-  window.document.getElementById('micookie').innerHTML = c;
-}
 
-function createCookie() {
-  //Cookie without expire time: it will expire when refreshing/closing the browser
-  // document.cookie="username=Alex Moros";
-  //Cookie with expire time
-  // document.cookie="username=Alex Moros; expires=Thu, 1 Dec 2014 12:00:00 UTC";
-  //Cookie with expire time and path
-  document.cookie = "username=Alex Moros; expires=Thu, 1 Dec 2014 12:00:00 UTC; path=/";
-}
-
-function createCookie2() {
-  document.cookie = "phone=976555123; expires=Thu, 1 Dec 2014 12:00:00 UTC; path=/";
-}
 /**************
  ** NAVIGATE **
  **************/
