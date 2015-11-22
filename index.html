@@ -6,14 +6,15 @@
     <link rel="stylesheet" href="css/index.css">
   </head>
   <body>
-      <h3>PRUEBAS DE FEEDBACK AL USUARIO: mensaje, alerts, prompts</h3>
+    <p class="briefing">Please, open the browser console to see the interaction responses</p>
     <section>
-      <p id="userWarn">Bloque para mostrar mensajes</p>
-      <button type="button" onclick="warnUser()">Advertir al usuario</button>
-      <button type="button" onclick="warnUserWithAlert('Cuidao!')">Advertir al usuario con un alert</button>
-      <button type="button" onclick="writeToConsole('Mensaje de prueba')">Escribir por consola</button>
-      <button onclick="tryConfirmBox()">Testear los "Confirm Box"</button>
-      <button onclick="tryPromptBox()">Testear los "Prompt Box"</button>
+      <h3>GIVE FEEDBACK TO THE USER</h3>
+      <p id="warnMessage">[Area to show messages]</p>
+      <button onclick="warnUserWithHTML()">Replacing HTML content</button>
+      <button onclick="warnUserWithAlert('Take care!')">Through an alert</button>
+      <button onclick="warnUserWithConfirmBox()">Through a "Confirm Box"</button>
+      <button onclick="warnUserWithPromptBox()">Through a "Prompt Box"</button>
+      <button onclick="writeToConsole('Warning the user via console')">Through the console</button>
     </section>
     <section>
       <h3>PRUEBAS DE TIPOS DE DATOS, FUNCIONES, OBJETOS...</h3>

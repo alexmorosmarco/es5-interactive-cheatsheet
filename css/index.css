@@ -8,3 +8,7 @@ section {
   padding: 5px;
   margin-bottom: 10px;
 }
+
+.briefing {
+  font-style: italic;
+}

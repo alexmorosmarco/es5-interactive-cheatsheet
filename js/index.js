@@ -4,26 +4,43 @@
  ** APP STARTUP **
  *****************/
 (function() {
-  // Window onload event customization
-  function windowLoaded() {
-    writeToConsole('WINDOW LOADED');
+  function onLoaded() {
+    writeToConsole('Loaded!!!');
     // Register events
     window.document.getElementById('btUseNamespace').onclick = function() {
       useNamespace();
     };
   }
-  window.onload = windowLoaded;
+  document.addEventListener('DOMContentLoaded', function(event) {
+    onLoaded();
+  }, false);
+  // Worse alternative cause it replaces any previously registered listener
+  //window.onload = onLoaded;
 }());
-/***************
- ** SHOW INFO **
- ***************/
-//Usa un parrafo para mostrar mensajes al usuario
-function warnUser() {
-  document.getElementById('userWarn').innerHTML = 'Rellene correctamente los campos ' + Date();
+/*******************************
+ ** GIVE FEEDBACK TO THE USER **
+ *******************************/
+function warnUserWithHTML() {
+  document.getElementById('warnMessage').innerHTML = 'Please, properly fill the field. Current time: ' + Date();
 }
 
 function warnUserWithAlert(msg) {
   alert(msg);
+}
+
+function warnUserWithConfirmBox() {
+  if (window.confirm("Choose an option!") == true) {
+    writeToConsole("You have pressed Accept");
+  } else {
+    writeToConsole("You have pressed Cancel");
+  }
+}
+
+function warnUserWithPromptBox() {
+  var person = window.prompt("Please enter your name", "Alex Moros Marco");
+  if (person != null) {
+    writeToConsole('Written text in the prompt: ' + person);
+  }
 }
 
 function writeToConsole(tag, msg) {
@@ -34,23 +51,6 @@ function writeToConsole(tag, msg) {
   }
   var currentTime = Date();
   console.log(currentTime + " '" + msg + "'");
-}
-/**************
- ** PROMPTS  **
- **************/
-function tryConfirmBox() {
-  if (window.confirm("Selecciona una opcion!") == true) {
-    writeToConsole("Has pulsado Aceptar");
-  } else {
-    writeToConsole("Has cancelado");
-  }
-}
-
-function tryPromptBox() {
-  var person = window.prompt("Please enter your name", "Alex Moros Marco");
-  if (person != null) {
-    writeToConsole('texto escrito en el Prompt: ' + person);
-  }
 }
 /***********
  ** TYPES **
