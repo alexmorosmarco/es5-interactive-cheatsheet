@@ -17,41 +17,6 @@
   // Worse alternative cause it replaces any previously registered listener
   //window.onload = onLoaded;
 }());
-/*******************************
- ** GIVE FEEDBACK TO THE USER **
- *******************************/
-function warnUserWithHTML() {
-  document.getElementById('warnMessage').innerHTML = 'Please, properly fill the field. Current time: ' + Date();
-}
-
-function warnUserWithAlert(msg) {
-  alert(msg);
-}
-
-function warnUserWithConfirmBox() {
-  if (window.confirm("Choose an option!") == true) {
-    writeToConsole("You have pressed Accept");
-  } else {
-    writeToConsole("You have pressed Cancel");
-  }
-}
-
-function warnUserWithPromptBox() {
-  var person = window.prompt("Please enter your name", "Alex Moros Marco");
-  if (person != null) {
-    writeToConsole('Written text in the prompt: ' + person);
-  }
-}
-
-function writeToConsole(tag, msg) {
-  if (arguments.length == 2) {
-    msg = tag + ': ' + msg;
-  } else {
-    msg = tag;
-  }
-  var currentTime = Date();
-  console.log(currentTime + " '" + msg + "'");
-}
 /***********
  ** TYPES **
  ***********/
@@ -66,7 +31,9 @@ function testTypes() {
   console.log(array[0]);
   console.log(object);
   console.log(object.lastName);
+  console.log(object['lastName']);
   console.log(typeof array);
+  console.log(typeof object);
   console.log(typeof object.lastName);
   console.log(typeof num);
 }
