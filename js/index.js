@@ -27,14 +27,18 @@ function testTypes() {
     lastName: "Moros"
   };
   var num;
+  var f = function (){};
   console.log(array);
   console.log(array[0]);
   console.log(object);
   console.log(object.lastName);
   console.log(object['lastName']);
+  console.log(f);
+  console.log(num);
   console.log(typeof array);
   console.log(typeof object);
   console.log(typeof object.lastName);
+  console.log(typeof f);
   console.log(typeof num);
 }
 /*************
