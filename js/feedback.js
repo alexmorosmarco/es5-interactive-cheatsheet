@@ -1,4 +1,3 @@
-//Start in strict mode so that non-defined variables give an error.
 "use strict";
 
 function warnUserWithHTML() {

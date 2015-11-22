@@ -27,7 +27,7 @@ function testTypes() {
     lastName: "Moros"
   };
   var num;
-  var f = function (){};
+  var f = function() {};
   console.log(array);
   console.log(array[0]);
   console.log(object);
@@ -312,26 +312,7 @@ function testTryCatch() {
     writeToConsole('Catch alcanzado capturando el siguient error: ' + err);
   }
 }
-/**************
- ** COOKIES  **
- **************/
-function readCookie() {
-  var c = window.document.cookie;
-  window.document.getElementById('micookie').innerHTML = c;
-}
 
-function createCookie() {
-  //Cookie without expire time: it will expire when refreshing/closing the browser
-  // document.cookie="username=Alex Moros";
-  //Cookie with expire time
-  // document.cookie="username=Alex Moros; expires=Thu, 1 Dec 2014 12:00:00 UTC";
-  //Cookie with expire time and path
-  document.cookie = "username=Alex Moros; expires=Thu, 1 Dec 2014 12:00:00 UTC; path=/";
-}
-
-function createCookie2() {
-  document.cookie = "phone=976555123; expires=Thu, 1 Dec 2014 12:00:00 UTC; path=/";
-}
 /**************
  ** NAVIGATE **
  **************/
