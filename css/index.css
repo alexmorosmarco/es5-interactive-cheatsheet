@@ -1,0 +1,14 @@
+h3 {
+  margin: 0px; /* To avoid UA default stylesheet margins */
+}
+
+section {
+  border: 1px dotted orange;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.briefing {
+  font-style: italic;
+}
