@@ -1,5 +1,4 @@
 "use strict";
-
 /***********
  ** TYPES **
  ***********/
@@ -42,6 +41,7 @@ function testObjects() {
   writeToConsole(TAG, personCJSOL.getFullName());
   writeToConsole(TAG, personCJSOL.birthYear);
   writeToConsole(TAG, personCJSOL['birthYear'] + ' (accessed as an array)');
+
   //2-Constructor with 'new Object()'
   //This constructor is slower than literal one
   TAG = 'CNO';
@@ -50,14 +50,14 @@ function testObjects() {
   personCNO.lastName = 'Moros';
   personCNO.birthYear = 1984;
   personCNO.getFullName = function() {
-      return this.firstName + ' ' + this.lastName;
-    }
-    //Log values
+    return this.firstName + ' ' + this.lastName;
+  }
+  //Log values
   writeToConsole(TAG, personCNO.getFullName());
   writeToConsole(TAG, personCNO.birthYear);
+
   //3-Constructor with an "object constructor function"="object prototype"
   TAG = 'COCF';
-
   function PersonCOCF(first, last, bYear) {
     this.firstName = first;
     this.lastName = last;
@@ -72,24 +72,24 @@ function testObjects() {
   // it in the constructor function, but this alternative is better because
   // the property will consume memory just once, in the prototype, rather than
   // in every instance. So it is accessed as properties defined in the
-  // constructor function: 'this.hyphenatedLastName'. It is NOT possible to
-  // access it by 'PersonCOCF.hyphenatedLastName'.
+  // constructor function: 'this.family'. It is NOT possible to access it by
+  // 'PersonCOCF.family'.
   PersonCOCF.TYPE = 'human'; // This way we define a public static property at
   // 'Class' level. It can only be accessed by 'PersonCOCF.TYPE'. It is not
   // possible to access it by 'instance.TYPE' because it is not inherited.
   var fatherCOCF = new PersonCOCF('Manuel', 'Moros', 1951);
   writeToConsole(TAG, 'family=' + fatherCOCF.family);
-  writeToConsole(TAG, 'constructor=' + fatherCOCF.constructor); // Returns object
-  // constructor function
+  writeToConsole(TAG, 'constructor=' + fatherCOCF.constructor); // Returns
+  // object constructor function
   var motherCOCF = new PersonCOCF('Carmen', 'Marco', 1953);
   motherCOCF.sex = "female";
   var x;
   for (x in motherCOCF) {
     writeToConsole(TAG, 'motherCOCF (accessed by a loop): ' + motherCOCF[x]);
   }
+
   //3-Constructor: one more example with private attributes and methods
   TAG = 'COCF2';
-
   function Developer(fullName, programmingLanguage, startYear) {
     //Private properties
     var id = fullName + '_' + startYear;
