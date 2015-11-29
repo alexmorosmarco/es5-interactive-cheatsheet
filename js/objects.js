@@ -140,30 +140,6 @@ function testObjects() {
   writeToConsole(TAG, alex.__proto__ === Object.prototype); // Returns false
 }
 /**************
- ** CLOSURES **
- **************/
-function testClosure() {
-  //Ejemplo practico de Closure: Acceso desde miembros privados a miembros publicos
-  function Constructor(msjPrivado, msjPublico) {
-    var propiedadPrivada = msjPrivado;
-    this.propiedadPublica = msjPublico;
-    var that = this;
-    /* La variable 'that' sera guardada en el closure para ser 
-       utilizada en su momento por la funcion metodoPrivado() 
-       ya que los metodos privados no pueden acceder a metodos
-       publicos porque en ese caso 'this' representa a 'Window'*/
-    var metodoPrivado = function() {
-      writeToConsole('CLOSURE', propiedadPrivada);
-      writeToConsole('CLOSURE', that.propiedadPublica);
-    };
-    this.metodoPublico = function() {
-      metodoPrivado();
-    };
-  }
-  var obj = new Constructor("mensaje privado", "mensaje publico");
-  obj.metodoPublico();
-}
-/**************
  *  PATTERNS  *
  **************/
 function testPatterns() {
