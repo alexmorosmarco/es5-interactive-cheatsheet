@@ -51,7 +51,7 @@ function testObjects() {
   personCNO.birthYear = 1984;
   personCNO.getFullName = function() {
     return this.firstName + ' ' + this.lastName;
-  }
+  };
   //Log values
   writeToConsole(TAG, personCNO.getFullName());
   writeToConsole(TAG, personCNO.birthYear);
@@ -64,7 +64,7 @@ function testObjects() {
     this.birthYear = bYear;
     this.getFullName = function() {
       return this.firstName + ' ' + this.lastName;
-    }
+    };
   }
   PersonCOCF.prototype.family = 'Moros Marco'; // This way we add a public
   // property to the prototype of an Object, so every instance of PersonCOCF
@@ -98,21 +98,21 @@ function testObjects() {
     var id = fullName + '_' + startYear;
     //Private methods
     var getCurrentYear = function() {
-        return new Date().getFullYear();
-      }
-      //Public properties
+      return new Date().getFullYear();
+    };
+    //Public properties
     this.fullName = fullName;
     this.programmingLanguage = programmingLanguage;
     this.startYear = startYear;
     //Public methods
     this.yearsOfExperience = function() {
       return getCurrentYear() - this.startYear; // If we put 'startYear'
-      // without the 'this', code will use the value received when object
-      // was created cause it will be saved in the closure. TAKE CARE!!!
-    }
+      // without the 'this', code will use the value received as param when the
+      // object was created cause it will be saved in the closure. TAKE CARE!!!
+    };
     this.getId = function() {
       return id;
-    }
+    };
   }
   Developer.prototype.canDevelop = true;
   Developer.TYPE = "DEV";
@@ -122,16 +122,23 @@ function testObjects() {
   writeToConsole(TAG, 'Years of experience: ' + alex.yearsOfExperience());
   writeToConsole(TAG, alex.canDevelop);
   writeToConsole(TAG, Developer.TYPE);
-  writeToConsole(TAG, Object.getPrototypeOf(alex) == Developer.prototype); // The
-  // prototype of an object is the prototype of its construction function.
-  // 'alex.prototype' is not grammatically correct, so we need that Object
-  // function to get its prototype. With literal constructor the prototype of
-  // the new object is 'Object.prototype'. TAKE CARE OF THIS.
-  writeToConsole(TAG, alex.__proto__ == Developer.prototype); // It seems we can
-  // access via this property. WARNING: this property is available only in
-  // some browsers. It has firstly been defined in ECMAScript 6.
-  writeToConsole(TAG, (Developer.prototype).isPrototypeOf(alex)); // Returns
+  // Parent check
+  writeToConsole(TAG, Developer.prototype.isPrototypeOf(alex)); // Returns
   // true if calling object is parent of alex, or parent of an alex parent.
+  writeToConsole(TAG, Object.prototype.isPrototypeOf(alex)); // Returns true
+  writeToConsole(TAG, alex instanceof Developer); // It has same behaviour as
+  // previos statement.
+  writeToConsole(TAG, alex instanceof Object); // Returns true
+  writeToConsole(TAG, Object.getPrototypeOf(alex) === Developer.prototype); //The
+  // prototype/parent/__proto__ of an object is the prototype of its constructor
+  // function. 'alex.prototype' is not grammatically correct, so we need that
+  // Object function to get its prototype. TAKE CARE OF THIS.
+  writeToConsole(TAG, Object.getPrototypeOf(alex) === Object.prototype); //false
+  writeToConsole(TAG, alex.__proto__ === Developer.prototype); // It seems we
+  // can access it via this property. WARNING: this property is available only
+  // in some browsers. It has firstly been defined in ECMAScript 6.
+  writeToConsole(TAG, alex.__proto__ === Object.prototype); // Returns false
+
 }
 /**************
  ** CLOSURES **
