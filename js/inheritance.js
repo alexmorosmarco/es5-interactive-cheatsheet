@@ -44,8 +44,28 @@
         +getYearsToRetirement()//uses a parent public function: getAge()
         //Constructor: call to Person constructor
         */
+function testInheritance () {
+  // 0-Standard inheritance through prototype and Object.create()
+  // Parent class
+  function Animal () {}
+  Animal.prototype.legs = 4;
 
-        function testInheritance () {
+  // Child class
+  function Human () {
+    Animal.call(this); // Call super constructor
+  }
+  Human.prototype = Object.create(Animal.prototype);
+  Human.prototype.constructor = Human;
+  Human.prototype.legs = 2;
+  Human.prototype.arms = 2;
+
+  var alex = new Human();
+  var tiguer = new Animal();
+
+  console.log(alex instanceof Human);
+  console.log(alex instanceof Animal);
+  console.log(alex instanceof Object);
+
     // 1-Using Object.create() allows to define the prototype.
     function Developer(fullName, programmingLanguage, startYear) {
         this.fullName = fullName;

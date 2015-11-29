@@ -138,7 +138,6 @@ function testObjects() {
   // can access it via this property. WARNING: this property is available only
   // in some browsers. It has firstly been defined in ECMAScript 6.
   writeToConsole(TAG, alex.__proto__ === Object.prototype); // Returns false
-
 }
 /**************
  ** CLOSURES **
