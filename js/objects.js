@@ -66,17 +66,20 @@ function testObjects() {
       return this.firstName + ' ' + this.lastName;
     }
   }
-  PersonCOCF.prototype.family = 'Moros Marco'; // This way we add
-  // a public property to the prototype of an Object, so every instance/object
-  // of PersonCOCF will inherit the property. It has the same result as defining
-  // it in the constructor function, but this alternative is better because
-  // the property will consume memory just once, in the prototype, rather than
-  // in every instance. So it is accessed as properties defined in the
-  // constructor function: 'this.family'. It is NOT possible to access it by
-  // 'PersonCOCF.family'.
+  PersonCOCF.prototype.family = 'Moros Marco'; // This way we add a public
+  // property to the prototype of an Object, so every instance of PersonCOCF
+  // will inherit it. It has the same result as defining it in the constructor
+  // function, but this alternative is better because the property will consume
+  // memory just once, in the prototype, rather than in every instance. This is
+  // even better when the property is a method so that it is common that the
+  // methods are wanted to be shared among instances. The property is accessed
+  // as properties defined in the constructor function: 'this.family'. It is
+  // NOT possible to access it via 'PersonCOCF.family'.
   PersonCOCF.TYPE = 'human'; // This way we define a public static property at
-  // 'Class' level. It can only be accessed by 'PersonCOCF.TYPE'. It is not
-  // possible to access it by 'instance.TYPE' because it is not inherited.
+  // "Class" level. It can only be accessed via 'PersonCOCF.TYPE'; it is not
+  // possible to access it via 'instance.TYPE' because it is not inherited, due
+  // to actually it has been added to the function object 'PersonCOCF'. This is
+  // also useful when we want to define methods at "Class" level.
   var fatherCOCF = new PersonCOCF('Manuel', 'Moros', 1951);
   writeToConsole(TAG, 'family=' + fatherCOCF.family);
   writeToConsole(TAG, 'constructor=' + fatherCOCF.constructor); // Returns
