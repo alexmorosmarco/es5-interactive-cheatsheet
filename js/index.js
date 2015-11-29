@@ -21,25 +21,30 @@
  * STATEMENTS *
  **************/
 function testClosure() {
-  //Ejemplo practico de Closure: Acceso desde miembros privados a miembros publicos
-  function Constructor(msjPrivado, msjPublico) {
-    var propiedadPrivada = msjPrivado;
-    this.propiedadPublica = msjPublico;
-    var that = this;
-    /* La variable 'that' sera guardada en el closure para ser 
-       utilizada en su momento por la funcion metodoPrivado() 
-       ya que los metodos privados no pueden acceder a metodos
-       publicos porque en ese caso 'this' representa a 'Window'*/
-    var metodoPrivado = function() {
-      writeToConsole('CLOSURE', propiedadPrivada);
-      writeToConsole('CLOSURE', that.propiedadPublica);
+  /**
+   * Good closure example. It allows access to private properties from public
+   * ones and the other way around.
+   */
+  function Constructor (privateMessage, publicMessage) {
+    var me = this; // The variable "me" is declared to save the "this" value in
+    // the closure, so that private methods can access public properties and
+    // methods. By default private methods cannot access them cause in that
+    // case "this" would mean the owner of the private method called.
+
+    // Properties   
+    var privateProperty = privateMessage;
+    this.publicProperty = publicMessage;
+    // Methods
+    var privateMethod = function () {
+      writeToConsole('CLOSURE', privateProperty);
+      writeToConsole('CLOSURE', me.publicProperty);
     };
-    this.metodoPublico = function() {
-      metodoPrivado();
+    this.publicMethod = function() {
+      privateMethod();
     };
   }
-  var obj = new Constructor("mensaje privado", "mensaje publico");
-  obj.metodoPublico();
+  var obj = new Constructor("private message", "public message");
+  obj.publicMethod();
 }
 function testExceptions() {
   try {
