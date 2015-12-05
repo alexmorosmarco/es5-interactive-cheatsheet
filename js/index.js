@@ -20,6 +20,32 @@
 /**************
  * STATEMENTS *
  **************/
+function testClosure() {
+  /**
+   * Good closure example. It allows access to private properties from public
+   * ones and the other way around.
+   */
+  function Constructor(privateMessage, publicMessage) {
+    var me = this; // The variable "me" is declared to save the "this" value in
+    // the closure, so that private methods can access public properties and
+    // methods. By default private methods cannot access them cause in that
+    // case "this" would mean the owner of the private method called.
+    // Properties   
+    var privateProperty = privateMessage;
+    this.publicProperty = publicMessage;
+    // Methods
+    var privateMethod = function() {
+      writeToConsole('CLOSURE', privateProperty);
+      writeToConsole('CLOSURE', me.publicProperty);
+    };
+    this.publicMethod = function() {
+      privateMethod();
+    };
+  }
+  var obj = new Constructor("private message", "public message");
+  obj.publicMethod();
+}
+
 function testExceptions() {
   try {
     // Exception: there are some extra 'd's

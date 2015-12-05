@@ -1,5 +1,4 @@
 "use strict";
-
 /***********
  ** TYPES **
  ***********/
@@ -42,6 +41,7 @@ function testObjects() {
   writeToConsole(TAG, personCJSOL.getFullName());
   writeToConsole(TAG, personCJSOL.birthYear);
   writeToConsole(TAG, personCJSOL['birthYear'] + ' (accessed as an array)');
+
   //2-Constructor with 'new Object()'
   //This constructor is slower than literal one
   TAG = 'CNO';
@@ -50,66 +50,69 @@ function testObjects() {
   personCNO.lastName = 'Moros';
   personCNO.birthYear = 1984;
   personCNO.getFullName = function() {
-      return this.firstName + ' ' + this.lastName;
-    }
-    //Log values
+    return this.firstName + ' ' + this.lastName;
+  };
+  //Log values
   writeToConsole(TAG, personCNO.getFullName());
   writeToConsole(TAG, personCNO.birthYear);
+
   //3-Constructor with an "object constructor function"="object prototype"
   TAG = 'COCF';
-
   function PersonCOCF(first, last, bYear) {
     this.firstName = first;
     this.lastName = last;
     this.birthYear = bYear;
     this.getFullName = function() {
       return this.firstName + ' ' + this.lastName;
-    }
+    };
   }
-  PersonCOCF.prototype.family = 'Moros Marco'; // This way we add
-  // a public property to the prototype of an Object, so every instance/object
-  // of PersonCOCF will inherit the property. It has the same result as defining
-  // it in the constructor function, but this alternative is better because
-  // the property will consume memory just once, in the prototype, rather than
-  // in every instance. So it is accessed as properties defined in the
-  // constructor function: 'this.hyphenatedLastName'. It is NOT possible to
-  // access it by 'PersonCOCF.hyphenatedLastName'.
+  PersonCOCF.prototype.family = 'Moros Marco'; // This way we add a public
+  // property to the prototype of an Object, so every instance of PersonCOCF
+  // will inherit it. It has the same result as defining it in the constructor
+  // function, but this alternative is better because the property will consume
+  // memory just once, in the prototype, rather than in every instance. This is
+  // even better when the property is a method so that it is common that the
+  // methods are wanted to be shared among instances. The property is accessed
+  // as properties defined in the constructor function: 'this.family'. It is
+  // NOT possible to access it via 'PersonCOCF.family'.
   PersonCOCF.TYPE = 'human'; // This way we define a public static property at
-  // 'Class' level. It can only be accessed by 'PersonCOCF.TYPE'. It is not
-  // possible to access it by 'instance.TYPE' because it is not inherited.
+  // "Class" level. It can only be accessed via 'PersonCOCF.TYPE'; it is not
+  // possible to access it via 'instance.TYPE' because it is not inherited, due
+  // to actually it has been added to the function object 'PersonCOCF'. This is
+  // also useful when we want to define methods at "Class" level.
   var fatherCOCF = new PersonCOCF('Manuel', 'Moros', 1951);
   writeToConsole(TAG, 'family=' + fatherCOCF.family);
-  writeToConsole(TAG, 'constructor=' + fatherCOCF.constructor); // Returns object
-  // constructor function
+  writeToConsole(TAG, 'constructor=' + fatherCOCF.constructor); // Returns
+  // object constructor function
   var motherCOCF = new PersonCOCF('Carmen', 'Marco', 1953);
   motherCOCF.sex = "female";
   var x;
   for (x in motherCOCF) {
     writeToConsole(TAG, 'motherCOCF (accessed by a loop): ' + motherCOCF[x]);
   }
+
   //3-Constructor: one more example with private attributes and methods
   TAG = 'COCF2';
-
   function Developer(fullName, programmingLanguage, startYear) {
     //Private properties
     var id = fullName + '_' + startYear;
     //Private methods
     var getCurrentYear = function() {
-        return new Date().getFullYear();
-      }
-      //Public properties
+      return new Date().getFullYear();
+    };
+    //Public properties
     this.fullName = fullName;
     this.programmingLanguage = programmingLanguage;
     this.startYear = startYear;
     //Public methods
     this.yearsOfExperience = function() {
       return getCurrentYear() - this.startYear; // If we put 'startYear'
-      // without the 'this', code will use the value received when object
-      // was created cause it will be saved in the closure. TAKE CARE!!!
-    }
+      // without the 'this', code will use the value received as param when the
+      // object was created cause it will be saved in the closure. TAKE CARE!!!
+    };
     this.getId = function() {
       return id;
-    }
+    };
   }
   Developer.prototype.canDevelop = true;
   Developer.TYPE = "DEV";
@@ -119,40 +122,22 @@ function testObjects() {
   writeToConsole(TAG, 'Years of experience: ' + alex.yearsOfExperience());
   writeToConsole(TAG, alex.canDevelop);
   writeToConsole(TAG, Developer.TYPE);
-  writeToConsole(TAG, Object.getPrototypeOf(alex) == Developer.prototype); // The
-  // prototype of an object is the prototype of its construction function.
-  // 'alex.prototype' is not grammatically correct, so we need that Object
-  // function to get its prototype. With literal constructor the prototype of
-  // the new object is 'Object.prototype'. TAKE CARE OF THIS.
-  writeToConsole(TAG, alex.__proto__ == Developer.prototype); // It seems we can
-  // access via this property. WARNING: this property is available only in
-  // some browsers. It has firstly been defined in ECMAScript 6.
-  writeToConsole(TAG, (Developer.prototype).isPrototypeOf(alex)); // Returns
+  // Parent check
+  writeToConsole(TAG, Developer.prototype.isPrototypeOf(alex)); // Returns
   // true if calling object is parent of alex, or parent of an alex parent.
-}
-/**************
- ** CLOSURES **
- **************/
-function testClosure() {
-  //Ejemplo practico de Closure: Acceso desde miembros privados a miembros publicos
-  function Constructor(msjPrivado, msjPublico) {
-    var propiedadPrivada = msjPrivado;
-    this.propiedadPublica = msjPublico;
-    var that = this;
-    /* La variable 'that' sera guardada en el closure para ser 
-       utilizada en su momento por la funcion metodoPrivado() 
-       ya que los metodos privados no pueden acceder a metodos
-       publicos porque en ese caso 'this' representa a 'Window'*/
-    var metodoPrivado = function() {
-      writeToConsole('CLOSURE', propiedadPrivada);
-      writeToConsole('CLOSURE', that.propiedadPublica);
-    };
-    this.metodoPublico = function() {
-      metodoPrivado();
-    };
-  }
-  var obj = new Constructor("mensaje privado", "mensaje publico");
-  obj.metodoPublico();
+  writeToConsole(TAG, Object.prototype.isPrototypeOf(alex)); // Returns true
+  writeToConsole(TAG, alex instanceof Developer); // It has same behaviour as
+  // previos statement.
+  writeToConsole(TAG, alex instanceof Object); // Returns true
+  writeToConsole(TAG, Object.getPrototypeOf(alex) === Developer.prototype); //The
+  // prototype/parent/__proto__ of an object is the prototype of its constructor
+  // function. 'alex.prototype' is not grammatically correct, so we need that
+  // Object function to get its prototype. TAKE CARE OF THIS.
+  writeToConsole(TAG, Object.getPrototypeOf(alex) === Object.prototype); //false
+  writeToConsole(TAG, alex.__proto__ === Developer.prototype); // It seems we
+  // can access it via this property. WARNING: this property is available only
+  // in some browsers. It has firstly been defined in ECMAScript 6.
+  writeToConsole(TAG, alex.__proto__ === Object.prototype); // Returns false
 }
 /**************
  *  PATTERNS  *
