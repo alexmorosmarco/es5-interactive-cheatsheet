@@ -156,7 +156,7 @@ function testObjects() {
   writeToConsole(TAG, rafa.fullName==undefined);
   // One more example
   var o1 = {p1:1};
-  // create a object o2, with parent o1, with property “p2”, and also set p2's
+  // create a object o2, with parent o1, with property "p2", and also set p2's
   // value and attributes
   var o2 = Object.create( o1, {
     "p2": {
