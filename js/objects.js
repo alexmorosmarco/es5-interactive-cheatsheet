@@ -234,34 +234,38 @@ function testPatterns() {
   calcTMP.logSum();
   writeToConsole('TMP', calcTMP instanceof CalculatorTMP); // returns false
 
-  //THE REVEALING MODULE PATTERN
-  //-Not allows:
-  //  *Less memory consumption
-  //-Allows:
-  //  *Private and public attributes/methods definition
-  //  *One fast place to see which ones are public
+  /**
+   * THE REVEALING MODULE PATTERN
+   * +Not allows:
+   *   -Less memory consumption
+   *   -Object type comparison through "instanceof"
+   * +Allows:
+   *   -Private properties
+   *   -Public properties unique to an object instance
+   *   -One fast place to see which ones are public
+   */
   var CalculatorTRMP = function(n1, n2) {
-      // Private attributes/methods
-      var patternName = 'TRMP';
-      var num1 = n1;
-      var num2 = n2;
-      var sum = function() {
-        return num1 + num2;
-      }
-      var logSum = function() {
-          writeToConsole(patternName + ': ' + sum());
-        }
-        // Public properties/methods are just returned
-      return {
-        logSum: logSum
-      };
-      //} (2,3);//One instance alternative
-    } //Multiple instances alternative
-    //CalculatorTRMP.logSum();//"One instance" example
+    // Private attributes/methods
+    var patternName = 'TRMP';
+    var num1 = n1;
+    var num2 = n2;
+    var sum = function() {
+      return num1 + num2;
+    };
+    var logSum = function() {
+      writeToConsole(patternName, sum());
+    };
+    // Public properties unique to an object instance are just returned
+    return {
+      logSum: logSum
+    };
+  //} (2,3);//One instance alternative
+  } //Multiple instances alternative
+  //CalculatorTRMP.logSum();//"One instance" example
   var calcTRMP = CalculatorTRMP(2, 3);
   calcTRMP.logSum();
-  var calcTRMP2 = new CalculatorTRMP(2, 3); //new alternative
-  calcTRMP2.logSum();
+  writeToConsole('TRMP', calcTRMP instanceof CalculatorTRMP); // returns false
+
   //THE REVEALING PROTOTYPE PATTERN
   //-Not allows:
   //  *Private attributes definition
