@@ -69,32 +69,6 @@ function testInheritance () {
   console.log(alex instanceof Animal);
   console.log(alex instanceof Object);
 
-  // 1-Using Object.create() allows to define the prototype.
-  function Developer(fullName, programmingLanguage, startYear) {
-    this.fullName = fullName;
-    this.programmingLanguage = programmingLanguage;
-    this.startYear = startYear;
-  }
-  var rafa = Object.create(Developer.prototype); // New object's prototype/
-  // parent is Developer.prototype; we did not use the constructor function
-  // of Developer so we did not assign those parameters. It is allowed to use
-  // new Developer(...), then the constructor properties will be inherited.
-  var o1 = {p1:1};
-  // create a object o2, with parent o1, with property “p2”, and also set p2's
-  // value and attributes
-  var o2 = Object.create( o1,
-    {"p2":
-    { value : 2,
-      writable: true,
-      enumerable: true,
-      configurable: true
-    } 
-  }
-  );
-  writeToConsole(Object.getPrototypeOf(o2) === o1);
-  writeToConsole('o2.p1:' + o2["p1"]);
-  writeToConsole('o2.p2:' + o2["p2"]);
-
   // 2-Setting prototype manually (THE PROTOTYPE PATTERN and inheritance, thus
   // using a constructor function and defining its prototype)
   // Parent "Class"

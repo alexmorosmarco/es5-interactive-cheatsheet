@@ -139,6 +139,36 @@ function testObjects() {
   // can access it via this property. WARNING: this property is available only
   // in some browsers. It has firstly been defined in ECMAScript 6.
   writeToConsole(TAG, alex.__proto__ === Object.prototype); // Returns false
+
+  // 4-Constructor using Object.create(<prototype of the parent>[,<property descriptors>])
+  // It allows defining the parent/object prototype of the instance
+  TAG = 'COC';
+  function Developer2(fullName, programmingLanguage, startYear) {
+    this.fullName = fullName;
+    this.programmingLanguage = programmingLanguage;
+    this.startYear = startYear;
+  }
+  var rafa = Object.create(Developer2.prototype); // New object's prototype/
+  // parent is Developer.prototype; we did not use the constructor function
+  // of Developer so we did not assign those parameters. It is allowed to use
+  // new Developer(...), then the constructor properties will be inherited.
+  writeToConsole(TAG, rafa instanceof Developer2);
+  writeToConsole(TAG, rafa.fullName==undefined);
+  // One more example
+  var o1 = {p1:1};
+  // create a object o2, with parent o1, with property “p2”, and also set p2's
+  // value and attributes
+  var o2 = Object.create( o1, {
+    "p2": {
+      value : 2,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    } 
+  });
+  writeToConsole(TAG, Object.getPrototypeOf(o2) === o1);
+  writeToConsole(TAG, o2["p1"]==1);
+  writeToConsole(TAG, o2["p2"]==2);
 }
 /**************
  *  PATTERNS  *
