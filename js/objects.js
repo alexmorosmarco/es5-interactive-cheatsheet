@@ -183,11 +183,11 @@ function testPatterns() {
    * +Allows:
    *   -Public properties
    *   -Public properties unique to an object instance
-   *   -Less memory consumption
+   *   -Less memory consumption because of using the function prototype property
    *   -Object type comparison through "instanceof"
    */
   var CalculatorTPP = function(n1, n2) {
-    // Public properties (unique to an object instance)
+    // Public properties unique to an object instance
     this.num1 = n1;
     this.num2 = n2;
   };
@@ -208,7 +208,8 @@ function testPatterns() {
   /**
    * THE MODULE PATTERN
    * +Not allows:
-   *   -Less memory consumption
+   *   -Less memory consumption because of not using the function prototype
+   *    property.
    *   -Object type comparison through "instanceof"
    * +Allows:
    *   -Private properties
@@ -237,12 +238,13 @@ function testPatterns() {
   /**
    * THE REVEALING MODULE PATTERN
    * +Not allows:
-   *   -Less memory consumption
+   *   -Less memory consumption because of not using the function prototype
+   *    property.
    *   -Object type comparison through "instanceof"
    * +Allows:
    *   -Private properties
    *   -Public properties unique to an object instance
-   *   -One fast place to see which ones are public
+   *   -One fast place to see which properties are public
    */
   var CalculatorTRMP = function(n1, n2) {
     // Private attributes/methods
