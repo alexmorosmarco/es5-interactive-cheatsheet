@@ -27,7 +27,7 @@ function testTypes() {
  ** OBJECTS **
  *************/
 function testObjects() {
-  //1-Constructor with JavaScript object literal
+  // 1-Constructor with JavaScript object literal
   var TAG = 'CJSOL';
   var personCJSOL = {
     firstName: 'Alex',
@@ -42,8 +42,8 @@ function testObjects() {
   writeToConsole(TAG, personCJSOL.birthYear);
   writeToConsole(TAG, personCJSOL['birthYear'] + ' (accessed as an array)');
 
-  //2-Constructor with 'new Object()'
-  //This constructor is slower than literal one
+  // 2-Constructor with 'new Object()'
+  // This constructor is slower than literal one
   TAG = 'CNO';
   var personCNO = new Object();
   personCNO.firstName = 'Alex';
@@ -56,7 +56,8 @@ function testObjects() {
   writeToConsole(TAG, personCNO.getFullName());
   writeToConsole(TAG, personCNO.birthYear);
 
-  //3-Constructor with an "object constructor function"="object prototype"
+  // 3-Constructor with an "object constructor function"
+  // It allows defining the parent/object prototype of the instance
   TAG = 'COCF';
   function PersonCOCF(first, last, bYear) {
     this.firstName = first;
@@ -91,7 +92,7 @@ function testObjects() {
     writeToConsole(TAG, 'motherCOCF (accessed by a loop): ' + motherCOCF[x]);
   }
 
-  //3-Constructor: one more example with private attributes and methods
+  // 3-Constructor: one more example with private attributes and methods
   TAG = 'COCF2';
   function Developer(fullName, programmingLanguage, startYear) {
     //Private properties
@@ -127,7 +128,7 @@ function testObjects() {
   // true if calling object is parent of alex, or parent of an alex parent.
   writeToConsole(TAG, Object.prototype.isPrototypeOf(alex)); // Returns true
   writeToConsole(TAG, alex instanceof Developer); // It has same behaviour as
-  // previos statement.
+  // previous statement.
   writeToConsole(TAG, alex instanceof Object); // Returns true
   writeToConsole(TAG, Object.getPrototypeOf(alex) === Developer.prototype); //The
   // prototype/parent/__proto__ of an object is the prototype of its constructor
