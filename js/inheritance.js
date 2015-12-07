@@ -45,22 +45,25 @@
         //Constructor: call to Person constructor
  */
 function testInheritance () {
-  // 0-Standard inheritance through prototype and Object.create()
+  // 1-Standard inheritance through prototype and Object.create()
   // Parent class
   function Animal () {}
   Animal.prototype.legs = 4;
 
   // Child class
   function Human () {
-    Animal.call(this); // Call super constructor
+    // Step 4 - Call parent’s constructor if needed
+    Animal.call(this);
   }
-  Human.prototype = Object.create(Animal.prototype);
+  // Step 1 - Define the inheritance chain
+  Human.prototype = Object.create(Animal.prototype); 
+  // Step 2 - Define the constructor property of the child class prototype [optional]
   Human.prototype.constructor = Human;
+  // Step 3 - Define the properties of the child class
   Human.prototype.legs = 2;
   Human.prototype.arms = 2;
 
   var alex = new Human();
-  var tiguer = new Animal();
 
   console.log(alex instanceof Human);
   console.log(alex instanceof Animal);
