@@ -45,52 +45,29 @@
         //Constructor: call to Person constructor
  */
 function testInheritance () {
-  // 0-Standard inheritance through prototype and Object.create()
+  // 1-Standard inheritance through prototype and Object.create()
   // Parent class
   function Animal () {}
   Animal.prototype.legs = 4;
 
   // Child class
   function Human () {
-    Animal.call(this); // Call super constructor
+    // Step 4 - Call parent’s constructor if needed
+    Animal.call(this);
   }
-  Human.prototype = Object.create(Animal.prototype);
+  // Step 1 - Define the inheritance chain
+  Human.prototype = Object.create(Animal.prototype); 
+  // Step 2 - Define the constructor property of the child class prototype [optional]
   Human.prototype.constructor = Human;
+  // Step 3 - Define the properties of the child class
   Human.prototype.legs = 2;
   Human.prototype.arms = 2;
 
   var alex = new Human();
-  var tiguer = new Animal();
 
   console.log(alex instanceof Human);
   console.log(alex instanceof Animal);
   console.log(alex instanceof Object);
-
-  // 1-Using Object.create() allows to define the prototype.
-  function Developer(fullName, programmingLanguage, startYear) {
-    this.fullName = fullName;
-    this.programmingLanguage = programmingLanguage;
-    this.startYear = startYear;
-  }
-  var rafa = Object.create(Developer.prototype); // New object's prototype/
-  // parent is Developer.prototype; we did not use the constructor function
-  // of Developer so we did not assign those parameters. It is allowed to use
-  // new Developer(...), then the constructor properties will be inherited.
-  var o1 = {p1:1};
-  // create a object o2, with parent o1, with property “p2”, and also set p2's
-  // value and attributes
-  var o2 = Object.create( o1,
-    {"p2":
-    { value : 2,
-      writable: true,
-      enumerable: true,
-      configurable: true
-    } 
-  }
-  );
-  writeToConsole(Object.getPrototypeOf(o2) === o1);
-  writeToConsole('o2.p1:' + o2["p1"]);
-  writeToConsole('o2.p2:' + o2["p2"]);
 
   // 2-Setting prototype manually (THE PROTOTYPE PATTERN and inheritance, thus
   // using a constructor function and defining its prototype)

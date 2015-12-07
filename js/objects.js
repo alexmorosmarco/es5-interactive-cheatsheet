@@ -27,7 +27,7 @@ function testTypes() {
  ** OBJECTS **
  *************/
 function testObjects() {
-  //1-Constructor with JavaScript object literal
+  // 1-Constructor with JavaScript object literal
   var TAG = 'CJSOL';
   var personCJSOL = {
     firstName: 'Alex',
@@ -42,8 +42,8 @@ function testObjects() {
   writeToConsole(TAG, personCJSOL.birthYear);
   writeToConsole(TAG, personCJSOL['birthYear'] + ' (accessed as an array)');
 
-  //2-Constructor with 'new Object()'
-  //This constructor is slower than literal one
+  // 2-Constructor with 'new Object()'
+  // This constructor is slower than literal one
   TAG = 'CNO';
   var personCNO = new Object();
   personCNO.firstName = 'Alex';
@@ -56,7 +56,8 @@ function testObjects() {
   writeToConsole(TAG, personCNO.getFullName());
   writeToConsole(TAG, personCNO.birthYear);
 
-  //3-Constructor with an "object constructor function"="object prototype"
+  // 3-Constructor with an "object constructor function"
+  // It allows defining the parent/object prototype of the instance
   TAG = 'COCF';
   function PersonCOCF(first, last, bYear) {
     this.firstName = first;
@@ -91,7 +92,7 @@ function testObjects() {
     writeToConsole(TAG, 'motherCOCF (accessed by a loop): ' + motherCOCF[x]);
   }
 
-  //3-Constructor: one more example with private attributes and methods
+  // 3-Constructor: one more example with private attributes and methods
   TAG = 'COCF2';
   function Developer(fullName, programmingLanguage, startYear) {
     //Private properties
@@ -127,7 +128,7 @@ function testObjects() {
   // true if calling object is parent of alex, or parent of an alex parent.
   writeToConsole(TAG, Object.prototype.isPrototypeOf(alex)); // Returns true
   writeToConsole(TAG, alex instanceof Developer); // It has same behaviour as
-  // previos statement.
+  // previous statement.
   writeToConsole(TAG, alex instanceof Object); // Returns true
   writeToConsole(TAG, Object.getPrototypeOf(alex) === Developer.prototype); //The
   // prototype/parent/__proto__ of an object is the prototype of its constructor
@@ -138,126 +139,187 @@ function testObjects() {
   // can access it via this property. WARNING: this property is available only
   // in some browsers. It has firstly been defined in ECMAScript 6.
   writeToConsole(TAG, alex.__proto__ === Object.prototype); // Returns false
+
+  // 4-Constructor using Object.create(<prototype of the parent>[,<property descriptors>])
+  // It allows defining the parent/object prototype of the instance
+  TAG = 'COC';
+  function Developer2(fullName, programmingLanguage, startYear) {
+    this.fullName = fullName;
+    this.programmingLanguage = programmingLanguage;
+    this.startYear = startYear;
+  }
+  var rafa = Object.create(Developer2.prototype); // New object's prototype/
+  // parent is Developer.prototype; we did not use the constructor function
+  // of Developer so we did not assign those parameters. It is allowed to use
+  // new Developer(...), then the constructor properties will be inherited.
+  writeToConsole(TAG, rafa instanceof Developer2);
+  writeToConsole(TAG, rafa.fullName == undefined);
+  // One more example
+  var o1 = {
+    p1: 1
+  };
+  // create a object o2, with parent o1, with property "p2", and also set p2's
+  // value and attributes
+  var o2 = Object.create(o1, {
+    "p2": {
+      value: 2,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    }
+  });
+  writeToConsole(TAG, Object.getPrototypeOf(o2) === o1);
+  writeToConsole(TAG, o2["p1"] == 1);
+  writeToConsole(TAG, o2["p2"] == 2);
 }
 /**************
  *  PATTERNS  *
  **************/
 function testPatterns() {
-  //THE PROTOTYPE PATTERN
-  //-Not allows:
-  //  *Private attributes/methods definition
-  //-Allows:
-  //  *Less memory consumption
+  /**
+   * THE PROTOTYPE PATTERN
+   * +Not allows:
+   *   -Private properties
+   * +Allows:
+   *   -Public properties
+   *   -Public properties unique to an object instance
+   *   -Less memory consumption because of using the function prototype property
+   *   -Object type comparison through "instanceof"
+   */
   var CalculatorTPP = function(n1, n2) {
-    // Public properties (unique to an object instance)
+    // Public properties unique to an object instance
     this.num1 = n1;
     this.num2 = n2;
   };
   CalculatorTPP.prototype = {
-    // Public properties/methods
+    // Public properties
     patternName: 'TPP',
     sum: function() {
       return this.num1 + this.num2;
     },
     logSum: function() {
-      writeToConsole(this.patternName + ': ' + this.sum());
+      writeToConsole(this.patternName, this.sum());
     }
   };
   var calcTPP = new CalculatorTPP(2, 3);
   calcTPP.logSum();
-  //THE MODULE PATTERN
-  //-Not allows:
-  //  *Less memory consumption
-  //-Allows:
-  //  *Private and public attributes/methods definition
+  writeToConsole(CalculatorTPP.prototype.patternName, calcTPP instanceof CalculatorTPP); // returns true
+
+  /**
+   * THE MODULE PATTERN
+   * +Not allows:
+   *   -Less memory consumption because of not using the function prototype
+   *    property.
+   *   -Object type comparison through "instanceof"
+   * +Allows:
+   *   -Private properties
+   *   -Public properties unique to an object instance
+   */
   var CalculatorTMP = function(n1, n2) {
-      // Private attributes/methods
-      var patternName = 'TMP';
-      var num1 = n1;
-      var num2 = n2;
-      var sum = function() {
-          return num1 + num2;
-        }
-        // Public properties/methods are created and returned
-      return {
-        logSum: function() {
-          writeToConsole(patternName + ': ' + sum());
-        }
-      };
-      //} (2,3);//One instance alternative
-    } //Multiple instances alternative
+    // Private properties
+    var patternName = 'TMP';
+    var num1 = n1;
+    var num2 = n2;
+    var sum = function() {
+      return num1 + num2;
+    };
+    // Public properties unique to an object instance are created and returned
+    return {
+      logSum: function() {
+        writeToConsole(patternName, sum());
+      }
+    };
+  }; // Multiple instances alternative
+  //} (2,3);// One instance alternative
   var calcTMP = CalculatorTMP(2, 3);
   calcTMP.logSum();
-  //THE REVEALING MODULE PATTERN
-  //-Not allows:
-  //  *Less memory consumption
-  //-Allows:
-  //  *Private and public attributes/methods definition
-  //  *One fast place to see which ones are public
+  writeToConsole('TMP', calcTMP instanceof CalculatorTMP); // returns false
+
+  /**
+   * THE REVEALING MODULE PATTERN
+   * +Not allows:
+   *   -Less memory consumption because of not using the function prototype
+   *    property.
+   *   -Object type comparison through "instanceof"
+   * +Allows:
+   *   -Private properties
+   *   -Public properties unique to an object instance
+   *   -One fast place to see which properties are public
+   */
   var CalculatorTRMP = function(n1, n2) {
-      // Private attributes/methods
-      var patternName = 'TRMP';
-      var num1 = n1;
-      var num2 = n2;
-      var sum = function() {
-        return num1 + num2;
-      }
-      var logSum = function() {
-          writeToConsole(patternName + ': ' + sum());
-        }
-        // Public properties/methods are just returned
-      return {
-        logSum: logSum
-      };
-      //} (2,3);//One instance alternative
-    } //Multiple instances alternative
-    //CalculatorTRMP.logSum();//"One instance" example
+    // Private attributes/methods
+    var patternName = 'TRMP';
+    var num1 = n1;
+    var num2 = n2;
+    var sum = function() {
+      return num1 + num2;
+    };
+    var logSum = function() {
+      writeToConsole(patternName, sum());
+    };
+    // Public properties unique to an object instance are just returned
+    return {
+      logSum: logSum
+    };
+  }; // Multiple instances alternative
+  //} (2,3);// One instance alternative
+  //CalculatorTRMP.logSum();// "One instance" example
   var calcTRMP = CalculatorTRMP(2, 3);
   calcTRMP.logSum();
-  var calcTRMP2 = new CalculatorTRMP(2, 3); //new alternative
-  calcTRMP2.logSum();
-  //THE REVEALING PROTOTYPE PATTERN
-  //-Not allows:
-  //  *Private attributes definition
-  //-Allows:
-  //  *Less memory consumption
-  //  *Private and public methods definition
-  //  *Public properties definition
-  //  *One fast place to see which attributes/methods are public
-  //  *Private shared attributes definition: every instance shares this
-  //  attributes so that they are in a closure at prototype level. WARNING! Any
-  //  instance can read the value, and can modify this shared value. It is
-  //  recommended to use this only as readable attributes.
+  writeToConsole('TRMP', calcTRMP instanceof CalculatorTRMP); // returns false
+
+  /**
+   * THE REVEALING PROTOTYPE PATTERN
+   * +Not allows:
+   *   -Private attribute properties
+   * +Allows:
+   *   -Private shared attribute properties: every instance shares these
+   *    attributes so that they are in a closure at prototype level. WARNING!
+   *    Any instance can read the value, and can modify this shared value. It is
+   *    recommended to use this only as readable attributes.
+   *   -Private method properties
+   *   -Public properties
+   *   -Public properties unique to an object instance
+   *   -Less memory consumption because of using the function prototype property
+   *   -Object type comparison through "instanceof"
+   *   -One fast place to see which properties are public
+   */
   var CalculatorTRPP = function(n1, n2) {
-    // Public properties (unique to an object instance)
+    // Public properties unique to an object instance
     this.num1 = n1;
     this.num2 = n2;
   };
   CalculatorTRPP.prototype = function() {
-    // Private shared attributes
+    // Private shared attribute properties
     var patternName = 'TRPP';
-    // Private methods
+    // Private method properties
     var sum = function() {
       return this.num1 + this.num2;
-    }
+    };
     var logSum = function() {
-        //Use of 'call' to allow using 'this' in the private method.
-        writeToConsole(patternName + ': ' + sum.call(this));
-      }
-      // Public properties/methods are just returned
+      //Use of 'call' to allow using 'this' in the private method.
+      writeToConsole(patternName, sum.call(this));
+    };
+    // Public properties are just returned
     return {
       logSum: logSum
     };
   }();
   var calcTRPP = new CalculatorTRPP(2, 3);
   calcTRPP.logSum();
-  //THE LAZY FUNCTION DEFINITION
-  //-Allows:
-  //  *Stuff that should be done once, is indeed only done once.
+  writeToConsole('TRPP', calcTRPP instanceof CalculatorTRPP); // returns true
+
+  /**
+   * THE LAZY FUNCTION DEFINITION
+   * +Not allows:
+   *   -
+   * +Allows:
+   *   -Stuff that should be done once, is indeed only done once.
+   */
   var getCalculator = function() {
     var calc = new CalculatorTRPP(2, 3);
-    //Redefinition of function to avoid executing previous code after the first
-    //call
+    // Redefinition of function to avoid executing previous code after the first
+    // call
     getCalculator = function() {
       return calc;
     };
@@ -265,4 +327,5 @@ function testPatterns() {
   };
   var anyCalculator = getCalculator();
   var anyCalculator2 = getCalculator();
+  writeToConsole('TLFD', anyCalculator === anyCalculator2); // returns true
 }
