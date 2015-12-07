@@ -229,8 +229,8 @@ function testPatterns() {
         writeToConsole(patternName, sum());
       }
     };
-  //} (2,3);//One instance alternative
-  } //Multiple instances alternative
+  }; // Multiple instances alternative
+  //} (2,3);// One instance alternative
   var calcTMP = CalculatorTMP(2, 3);
   calcTMP.logSum();
   writeToConsole('TMP', calcTMP instanceof CalculatorTMP); // returns false
@@ -261,9 +261,9 @@ function testPatterns() {
     return {
       logSum: logSum
     };
-  //} (2,3);//One instance alternative
-  } //Multiple instances alternative
-  //CalculatorTRMP.logSum();//"One instance" example
+  }; // Multiple instances alternative
+  //} (2,3);// One instance alternative
+  //CalculatorTRMP.logSum();// "One instance" example
   var calcTRMP = CalculatorTRMP(2, 3);
   calcTRMP.logSum();
   writeToConsole('TRMP', calcTRMP instanceof CalculatorTRMP); // returns false
