@@ -230,7 +230,6 @@ function testPatterns() {
     };
   //} (2,3);//One instance alternative
   } //Multiple instances alternative
-  //TODO: comprobar que no se llama con "new"
   var calcTMP = CalculatorTMP(2, 3);
   calcTMP.logSum();
   writeToConsole('TMP', calcTMP instanceof CalculatorTMP); // returns false
