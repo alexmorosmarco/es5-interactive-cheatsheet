@@ -268,41 +268,47 @@ function testPatterns() {
   calcTRMP.logSum();
   writeToConsole('TRMP', calcTRMP instanceof CalculatorTRMP); // returns false
 
-  //THE REVEALING PROTOTYPE PATTERN
-  //-Not allows:
-  //  *Private attributes definition
-  //-Allows:
-  //  *Less memory consumption
-  //  *Private and public methods definition
-  //  *Public properties definition
-  //  *One fast place to see which attributes/methods are public
-  //  *Private shared attributes definition: every instance shares this
-  //  attributes so that they are in a closure at prototype level. WARNING! Any
-  //  instance can read the value, and can modify this shared value. It is
-  //  recommended to use this only as readable attributes.
+  /**
+   * THE REVEALING PROTOTYPE PATTERN
+   * +Not allows:
+   *   -Private attribute properties
+   * +Allows:
+   *   -Private shared attribute properties: every instance shares these
+   *    attributes so that they are in a closure at prototype level. WARNING!
+   *    Any instance can read the value, and can modify this shared value. It is
+   *    recommended to use this only as readable attributes.
+   *   -Private method properties
+   *   -Public properties
+   *   -Public properties unique to an object instance
+   *   -Less memory consumption because of using the function prototype property
+   *   -Object type comparison through "instanceof"
+   *   -One fast place to see which properties are public
+   */
   var CalculatorTRPP = function(n1, n2) {
-    // Public properties (unique to an object instance)
+    // Public properties unique to an object instance
     this.num1 = n1;
     this.num2 = n2;
   };
   CalculatorTRPP.prototype = function() {
-    // Private shared attributes
+    // Private shared attribute properties
     var patternName = 'TRPP';
-    // Private methods
+    // Private method properties
     var sum = function() {
       return this.num1 + this.num2;
-    }
+    };
     var logSum = function() {
-        //Use of 'call' to allow using 'this' in the private method.
-        writeToConsole(patternName + ': ' + sum.call(this));
-      }
-      // Public properties/methods are just returned
+      //Use of 'call' to allow using 'this' in the private method.
+      writeToConsole(patternName, sum.call(this));
+    };
+    // Public properties are just returned
     return {
       logSum: logSum
     };
   }();
   var calcTRPP = new CalculatorTRPP(2, 3);
   calcTRPP.logSum();
+  writeToConsole('TRPP', calcTRPP instanceof CalculatorTRPP); // returns true
+
   //THE LAZY FUNCTION DEFINITION
   //-Allows:
   //  *Stuff that should be done once, is indeed only done once.
