@@ -327,5 +327,5 @@ function testPatterns() {
   };
   var anyCalculator = getCalculator();
   var anyCalculator2 = getCalculator();
-  writeToConsole('TLFD',anyCalculator===anyCalculator2); // returns true
+  writeToConsole('TLFD', anyCalculator === anyCalculator2); // returns true
 }
