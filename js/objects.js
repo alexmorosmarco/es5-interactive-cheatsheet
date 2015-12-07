@@ -309,13 +309,17 @@ function testPatterns() {
   calcTRPP.logSum();
   writeToConsole('TRPP', calcTRPP instanceof CalculatorTRPP); // returns true
 
-  //THE LAZY FUNCTION DEFINITION
-  //-Allows:
-  //  *Stuff that should be done once, is indeed only done once.
+  /**
+   * THE LAZY FUNCTION DEFINITION
+   * +Not allows:
+   *   -
+   * +Allows:
+   *   -Stuff that should be done once, is indeed only done once.
+   */
   var getCalculator = function() {
     var calc = new CalculatorTRPP(2, 3);
-    //Redefinition of function to avoid executing previous code after the first
-    //call
+    // Redefinition of function to avoid executing previous code after the first
+    // call
     getCalculator = function() {
       return calc;
     };
@@ -323,4 +327,5 @@ function testPatterns() {
   };
   var anyCalculator = getCalculator();
   var anyCalculator2 = getCalculator();
+  writeToConsole('TLFD',anyCalculator===anyCalculator2); // returns true
 }
