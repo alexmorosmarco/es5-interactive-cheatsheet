@@ -153,22 +153,24 @@ function testObjects() {
   // of Developer so we did not assign those parameters. It is allowed to use
   // new Developer(...), then the constructor properties will be inherited.
   writeToConsole(TAG, rafa instanceof Developer2);
-  writeToConsole(TAG, rafa.fullName==undefined);
+  writeToConsole(TAG, rafa.fullName == undefined);
   // One more example
-  var o1 = {p1:1};
+  var o1 = {
+    p1: 1
+  };
   // create a object o2, with parent o1, with property "p2", and also set p2's
   // value and attributes
-  var o2 = Object.create( o1, {
+  var o2 = Object.create(o1, {
     "p2": {
-      value : 2,
+      value: 2,
       writable: true,
       enumerable: true,
       configurable: true
-    } 
+    }
   });
   writeToConsole(TAG, Object.getPrototypeOf(o2) === o1);
-  writeToConsole(TAG, o2["p1"]==1);
-  writeToConsole(TAG, o2["p2"]==2);
+  writeToConsole(TAG, o2["p1"] == 1);
+  writeToConsole(TAG, o2["p2"] == 2);
 }
 /**************
  *  PATTERNS  *
