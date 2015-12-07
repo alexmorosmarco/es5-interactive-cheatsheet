@@ -176,51 +176,65 @@ function testObjects() {
  *  PATTERNS  *
  **************/
 function testPatterns() {
-  //THE PROTOTYPE PATTERN
-  //-Not allows:
-  //  *Private attributes/methods definition
-  //-Allows:
-  //  *Less memory consumption
+  /**
+   * THE PROTOTYPE PATTERN
+   * +Not allows:
+   *   -Private properties
+   * +Allows:
+   *   -Public properties
+   *   -Public properties unique to an object instance
+   *   -Less memory consumption
+   *   -Object type comparison through "instanceof"
+   */
   var CalculatorTPP = function(n1, n2) {
     // Public properties (unique to an object instance)
     this.num1 = n1;
     this.num2 = n2;
   };
   CalculatorTPP.prototype = {
-    // Public properties/methods
+    // Public properties
     patternName: 'TPP',
     sum: function() {
       return this.num1 + this.num2;
     },
     logSum: function() {
-      writeToConsole(this.patternName + ': ' + this.sum());
+      writeToConsole(this.patternName, this.sum());
     }
   };
   var calcTPP = new CalculatorTPP(2, 3);
   calcTPP.logSum();
-  //THE MODULE PATTERN
-  //-Not allows:
-  //  *Less memory consumption
-  //-Allows:
-  //  *Private and public attributes/methods definition
+  writeToConsole(CalculatorTPP.prototype.patternName, calcTPP instanceof CalculatorTPP); // returns true
+
+  /**
+   * THE MODULE PATTERN
+   * +Not allows:
+   *   -Less memory consumption
+   *   -Object type comparison through "instanceof"
+   * +Allows:
+   *   -Private properties
+   *   -Public properties unique to an object instance
+   */
   var CalculatorTMP = function(n1, n2) {
-      // Private attributes/methods
-      var patternName = 'TMP';
-      var num1 = n1;
-      var num2 = n2;
-      var sum = function() {
-          return num1 + num2;
-        }
-        // Public properties/methods are created and returned
-      return {
-        logSum: function() {
-          writeToConsole(patternName + ': ' + sum());
-        }
-      };
-      //} (2,3);//One instance alternative
-    } //Multiple instances alternative
+    // Private properties
+    var patternName = 'TMP';
+    var num1 = n1;
+    var num2 = n2;
+    var sum = function() {
+      return num1 + num2;
+    };
+    // Public properties unique to an object instance are created and returned
+    return {
+      logSum: function() {
+        writeToConsole(patternName, sum());
+      }
+    };
+  //} (2,3);//One instance alternative
+  } //Multiple instances alternative
+  //TODO: comprobar que no se llama con "new"
   var calcTMP = CalculatorTMP(2, 3);
   calcTMP.logSum();
+  writeToConsole('TMP', calcTMP instanceof CalculatorTMP); // returns false
+
   //THE REVEALING MODULE PATTERN
   //-Not allows:
   //  *Less memory consumption
