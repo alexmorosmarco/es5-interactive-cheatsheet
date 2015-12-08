@@ -93,7 +93,9 @@ function testInheritance () {
     CalculatorTPP.call(this,n1,n2);
     this.corruptIncrease = 100;
   };
-  // Below code is the manual way of inheriting in JS.
+  /**
+   * Extends from a parent class manually
+   */
   function extendParentClass0 () {
     CorruptCalculatorTPP.prototype = Object.create(CalculatorTPP.prototype);
     CorruptCalculatorTPP.prototype.constructor = CorruptCalculatorTPP;
@@ -103,20 +105,34 @@ function testInheritance () {
       return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
     };
   }
-  // Below code is a much cleaner solution to extend a parent "Class".
+  /**
+   * Extends from a parent class through a function that does the dirty work
+   */
   function extendParentClass1 () {
-    function extend (parentClass, newProperties) {
-      var newPrototype = new parentClass();
+    /**
+     * Extends a childClass from a parentClass automatically setting the child
+     * prototype and its constructor. The newProperties are defined in the new
+     * prototype of the child class.
+     *
+     * -childClass: object constructor function of the child
+     * -parentClass: object constructor function of the parent
+     * -newProperties: object with the properties to be added to the prototype
+     * of the child
+     */
+    function extend (childClass, parentClass, newProperties) {
+      var newPrototype = Object.create(parentClass.prototype);
+      newPrototype.constructor = childClass;
+
       var p;
       for (p in newProperties) {
         newPrototype[p] = newProperties[p];
       };
-      return newPrototype;
+      childClass.prototype = newPrototype;
     }
-    CorruptCalculatorTPP.prototype = extend(CalculatorTPP,{
+    extend(CorruptCalculatorTPP, CalculatorTPP, {
       tag: 'CorruptCalculatorTPP',
       sum: function () {
-        return this.num1 + this.num2 + this.corruptIncrease;
+        return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
       }
     });
   }
