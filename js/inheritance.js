@@ -136,16 +136,16 @@ function testInheritance () {
   }
   extendParentClass1();
   var corrCalcTPP = new CorruptCalculatorTPP(2,3);
-  writeToConsole(corrCalcTPP.tag,corrCalcTPP.num1);
-  writeToConsole(corrCalcTPP.tag,corrCalcTPP.corruptIncrease);
-  corrCalcTPP.logSum();
-  writeToConsole(corrCalcTPP.tag,(CorruptCalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));
-  writeToConsole(corrCalcTPP.tag,(CalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));
-  writeToConsole(corrCalcTPP.tag,(Object.prototype).isPrototypeOf(corrCalcTPP));
+  writeToConsole(corrCalcTPP.tag,corrCalcTPP.num1===2);// true
+  writeToConsole(corrCalcTPP.tag,corrCalcTPP.corruptIncrease===100);// true
+  corrCalcTPP.logSum();// logs 105
+  writeToConsole(corrCalcTPP.tag,(CorruptCalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));// true
+  writeToConsole(corrCalcTPP.tag,(CalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));// true
+  writeToConsole(corrCalcTPP.tag,(Object.prototype).isPrototypeOf(corrCalcTPP));// true
   var calcTPP = new CalculatorTPP(2,3);
-  writeToConsole(calcTPP.tag,calcTPP.num1);
-  writeToConsole(calcTPP.tag,calcTPP.corruptIncrease);// returns undefined
-  calcTPP.logSum();
+  writeToConsole(calcTPP.tag,calcTPP.num1===2);// true
+  writeToConsole(calcTPP.tag,calcTPP.corruptIncrease===undefined);// true
+  calcTPP.logSum();// logs 5
 }
 
 
