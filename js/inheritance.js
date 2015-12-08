@@ -126,26 +126,32 @@ function testInheritance () {
   var testFunctions = [extendParentClass0, extendParentClass1];
   var testFunction;
   var i;
+  var testEvaluations = {};
+  var testEvaluation;
   for (i in testFunctions) {
     testFunction = testFunctions[i];
     // Execute test
     testFunction();
     // Evaluate test
+    testEvaluation = {};
     TAG = testFunction.name;
     var corrCalcTPP = new CorruptCalculatorTPP(2,3);
-    writeToConsole(TAG,(CorruptCalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));// true
-    writeToConsole(TAG,(CalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));// true
-    writeToConsole(TAG,(Object.prototype).isPrototypeOf(corrCalcTPP));// true
-    writeToConsole(TAG,corrCalcTPP.num1===2);// true
-    writeToConsole(TAG,corrCalcTPP.num2===3);// true
-    writeToConsole(TAG,corrCalcTPP.sum()===105);// true
+    testEvaluation['prototype > child'] = (CorruptCalculatorTPP.prototype).isPrototypeOf(corrCalcTPP);// true
+    testEvaluation['parent > child'] = (CalculatorTPP.prototype).isPrototypeOf(corrCalcTPP);// true
+    testEvaluation['Object > child'] = (Object.prototype).isPrototypeOf(corrCalcTPP);// true
+    testEvaluation['child num1 === 2'] = (corrCalcTPP.num1===2);// true
+    testEvaluation['child num2 === 3'] = (corrCalcTPP.num2===3);// true
+    testEvaluation['child sum === 105'] = (corrCalcTPP.sum()===105);// true
     corrCalcTPP.logSum();// logs 105
     var calcTPP = new CalculatorTPP(2,3);
-    writeToConsole(TAG,calcTPP.num1===2);// true
-    writeToConsole(TAG,calcTPP.num2===3);// true
-    writeToConsole(TAG,calcTPP.sum()===5);// true
+    testEvaluation['parent num1 === 2'] = (calcTPP.num1===2);// true
+    testEvaluation['parent num2 === 3'] = (calcTPP.num2===3);// true
+    testEvaluation['parent sum === 5'] = (calcTPP.sum()===5);// true
     calcTPP.logSum();// logs 5
+    // Append test evaluation
+    testEvaluations[testFunction.name] = testEvaluation;
   }
+  console.table(testEvaluations);
 }
 
 
