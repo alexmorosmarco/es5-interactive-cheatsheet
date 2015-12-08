@@ -44,6 +44,8 @@
  */
 function testInheritance () {
   // 1-Standard inheritance through prototype and Object.create()
+  // Class definition using an "object constructor function" and defining public
+  // properties in its prototype
   var TAG = 'SI';
   // Parent class
   function Animal () {}
@@ -67,10 +69,7 @@ function testInheritance () {
   writeToConsole(TAG, alex instanceof Animal);
   writeToConsole(TAG, alex instanceof Object);
 
-  // 2-Setting prototype manually (THE PROTOTYPE PATTERN and inheritance, thus
-  // using a constructor function and defining its prototype)
-  // Parent class definition using an "object constructor function" and defining
-  // public properties in its prototype
+  // 2-Standard inheritance through a function that does the "dirty work"
   // Parent class
   var CalculatorTPP = function (n1, n2) {
     // Public properties unique to an object instance
