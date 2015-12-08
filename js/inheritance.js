@@ -90,22 +90,14 @@ function testInheritance () {
   };
   // Child class
   var CorruptCalculatorTPP = function (n1, n2) {
-    this.init(n1,n2);
+    CalculatorTPP.call(this,n1,n2);
     this.corruptIncrease = 100;
   };
   // Below code is the manual way of inheriting in JS.
   function extendParentClass0 () {
-    CorruptCalculatorTPP.prototype = new CalculatorTPP();// Assigning
-    // 'new CalculatorTPP()' instead of 'CalculatorTPP.prototype' allows us 
-    // to inherit, not only the prototype properties but also the
-    // CalculatorTPP constructor properties. It is important to do it like
-    // this because if we write 'CalculatorTPP.prototype' and then we
-    // override a method like below, the CalculatorTPP.prototype method
-    // would be changed (this side effect is not a good idea cause
-    // CalculatorTPP instances would get a new method implementation without
-    // being expected).
-    // Override CorruptCalculatorTPP’s properties that were inherited from
-    // CalculatorTPP.
+    CorruptCalculatorTPP.prototype = Object.create(CalculatorTPP.prototype);
+    CorruptCalculatorTPP.prototype.constructor = CorruptCalculatorTPP;
+    // Override properties that were inherited from CalculatorTPP
     CorruptCalculatorTPP.prototype.tag = 'CorruptCalculatorTPP';
     CorruptCalculatorTPP.prototype.sum = function () {
       return this.num1 + this.num2 + this.corruptIncrease;
