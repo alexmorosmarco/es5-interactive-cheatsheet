@@ -100,7 +100,7 @@ function testInheritance () {
     // Override properties that were inherited from CalculatorTPP
     CorruptCalculatorTPP.prototype.tag = 'CorruptCalculatorTPP';
     CorruptCalculatorTPP.prototype.sum = function () {
-      return this.num1 + this.num2 + this.corruptIncrease;
+      return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
     };
   }
   // Below code is a much cleaner solution to extend a parent "Class".
