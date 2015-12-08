@@ -121,17 +121,22 @@ function testInheritance () {
       }
     });
   }
+
+  // Tests
   extendParentClass1();
+  TAG = extendParentClass1.name;
   var corrCalcTPP = new CorruptCalculatorTPP(2,3);
-  writeToConsole(corrCalcTPP.tag,corrCalcTPP.num1===2);// true
-  writeToConsole(corrCalcTPP.tag,corrCalcTPP.corruptIncrease===100);// true
+  writeToConsole(TAG,(CorruptCalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));// true
+  writeToConsole(TAG,(CalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));// true
+  writeToConsole(TAG,(Object.prototype).isPrototypeOf(corrCalcTPP));// true
+  writeToConsole(TAG,corrCalcTPP.num1===2);// true
+  writeToConsole(TAG,corrCalcTPP.num2===3);// true
+  writeToConsole(TAG,corrCalcTPP.sum()===105);// true
   corrCalcTPP.logSum();// logs 105
-  writeToConsole(corrCalcTPP.tag,(CorruptCalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));// true
-  writeToConsole(corrCalcTPP.tag,(CalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));// true
-  writeToConsole(corrCalcTPP.tag,(Object.prototype).isPrototypeOf(corrCalcTPP));// true
   var calcTPP = new CalculatorTPP(2,3);
-  writeToConsole(calcTPP.tag,calcTPP.num1===2);// true
-  writeToConsole(calcTPP.tag,calcTPP.corruptIncrease===undefined);// true
+  writeToConsole(TAG,calcTPP.num1===2);// true
+  writeToConsole(TAG,calcTPP.num2===3);// true
+  writeToConsole(TAG,calcTPP.sum()===5);// true
   calcTPP.logSum();// logs 5
 }
 
