@@ -121,20 +121,6 @@ function testInheritance () {
       }
     });
   }
-  // Below code is the inverse of previous alternative. In this case the
-  // prototype is an Object whose prototype (__proto__) is the parent "Class".
-  // This solution is analog to the child "Class" prototype definition. It
-  // may give different results from previous solution when using methods like
-  // getPrototypeOf().
-  function extendParentClass2 () {
-    CorruptCalculatorTPP.prototype = {
-      tag: 'CorruptCalculatorTPP',
-      sum: function () {
-        return this.num1 + this.num2 + this.corruptIncrease;
-      }
-    };
-    CorruptCalculatorTPP.prototype.__proto__ = new CalculatorTPP();
-  }
   extendParentClass1();
   var corrCalcTPP = new CorruptCalculatorTPP(2,3);
   writeToConsole(corrCalcTPP.tag,corrCalcTPP.num1===2);// true
