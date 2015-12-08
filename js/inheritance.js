@@ -85,14 +85,14 @@ function testInheritance () {
       return this.num1 + this.num2;
     },
     logSum: function () {
-      writeToConsole(this.tag + ': ' + this.sum());
+      writeToConsole(this.tag, this.sum());
     }
   };
   // Child class
   var CorruptCalculatorTPP = function (n1, n2) {
     this.init(n1,n2);
     this.corruptIncrease = 100;
-  }
+  };
   // Below code is the manual way of inheriting in JS.
   function extendParentClass0 () {
     CorruptCalculatorTPP.prototype = new CalculatorTPP();// Assigning
@@ -152,8 +152,7 @@ function testInheritance () {
   writeToConsole(corrCalcTPP.tag,(Object.prototype).isPrototypeOf(corrCalcTPP));
   var calcTPP = new CalculatorTPP(2,3);
   writeToConsole(calcTPP.tag,calcTPP.num1);
-  writeToConsole(calcTPP.tag,calcTPP.corruptIncrease);// Will fail, not
-  // inherited
+  writeToConsole(calcTPP.tag,calcTPP.corruptIncrease);// returns undefined
   calcTPP.logSum();
 }
 
