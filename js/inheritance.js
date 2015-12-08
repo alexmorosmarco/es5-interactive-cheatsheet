@@ -69,25 +69,26 @@ function testInheritance () {
 
   // 2-Setting prototype manually (THE PROTOTYPE PATTERN and inheritance, thus
   // using a constructor function and defining its prototype)
+  // Parent class definition using an "object constructor function" and defining
+  // public properties in its prototype
   // Parent class
   var CalculatorTPP = function (n1, n2) {
-    // Public properties (unique to an object instance)
+    // Public properties unique to an object instance
     this.init(n1,n2);
   };
-  CalculatorTPP.prototype = {
-    // Public properties/methods
-    tag: 'CalculatorTPP',
-    init: function (n1, n2) {
-      this.num1 = n1;
-      this.num2 = n2;
-    },
-    sum: function() {
-      return this.num1 + this.num2;
-    },
-    logSum: function () {
-      writeToConsole(this.tag, this.sum());
-    }
+  // Public properties
+  CalculatorTPP.prototype.tag = 'CalculatorTPP';
+  CalculatorTPP.prototype.init = function (n1, n2) {
+    this.num1 = n1;
+    this.num2 = n2;
   };
+  CalculatorTPP.prototype.sum = function() {
+    return this.num1 + this.num2;
+  };
+  CalculatorTPP.prototype.logSum = function () {
+    writeToConsole(this.tag, this.sum());
+  };
+
   // Child class
   var CorruptCalculatorTPP = function (n1, n2) {
     CalculatorTPP.call(this,n1,n2);
