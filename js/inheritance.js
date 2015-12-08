@@ -1,18 +1,16 @@
 "use strict";
-/*  IMPORTANT NOTES ABOUT JAVASCRIPT AND INHERITANCE:
-    -Prototype based patterns allow to consume less memory, so that it lets
-    defining functions and properties in the prototype rather than in each
-    instance. So they will consume memory only once, in the prototype, and every
-    instance/object will have access to them so that every instance inherits
-    from the prototype.
-
-    -There's no way to implement "protected" attributes (create properties in a
-    base prototype that inheriting prototypes can use, but the outside world
-    can't).
-
-    -It is not possible for a child to invoke a parent method if the child
-    overrode that method. So there is no way to call something like
-    'super.method()'.
+/**
+ * IMPORTANT NOTES ABOUT JAVASCRIPT AND INHERITANCE:
+ *
+ * -Prototype based patterns allow to consume less memory, so that it lets
+ *  defining functions and properties in the prototype rather than in each
+ *  instance. So they will consume memory only once, in the prototype, and every
+ *  instance/object will have access to them so that every instance inherits
+ *  from the prototype.
+ *
+ * -There's no way to implement "protected" attributes (create properties in a
+ *  base prototype that inheriting prototypes can use, but the outside world
+ *  can't).
  */
 
 /*  "Class" model to be implemented and analyzed using different programming
@@ -71,48 +69,48 @@ function testInheritance () {
 
   // 2-Setting prototype manually (THE PROTOTYPE PATTERN and inheritance, thus
   // using a constructor function and defining its prototype)
-  // Parent "Class"
+  // Parent class
   var CalculatorTPP = function (n1, n2) {
-      // Public properties (unique to an object instance)
-      this.init(n1,n2);
-    };
-    CalculatorTPP.prototype = {
-      // Public properties/methods
-      tag: 'CalculatorTPP',
-      init: function (n1, n2) {
-        this.num1 = n1;
-        this.num2 = n2;
-      },
-      sum: function() {
-        return this.num1 + this.num2;
-      },
-      logSum: function () {
-        writeToConsole(this.tag + ': ' + this.sum());
-      }
-    };
-  // Child "Class"
+    // Public properties (unique to an object instance)
+    this.init(n1,n2);
+  };
+  CalculatorTPP.prototype = {
+    // Public properties/methods
+    tag: 'CalculatorTPP',
+    init: function (n1, n2) {
+      this.num1 = n1;
+      this.num2 = n2;
+    },
+    sum: function() {
+      return this.num1 + this.num2;
+    },
+    logSum: function () {
+      writeToConsole(this.tag + ': ' + this.sum());
+    }
+  };
+  // Child class
   var CorruptCalculatorTPP = function (n1, n2) {
     this.init(n1,n2);
     this.corruptIncrease = 100;
   }
   // Below code is the manual way of inheriting in JS.
   function extendParentClass0 () {
-      CorruptCalculatorTPP.prototype = new CalculatorTPP();// Assigning
-      // 'new CalculatorTPP()' instead of 'CalculatorTPP.prototype' allows us 
-      // to inherit, not only the prototype properties but also the
-      // CalculatorTPP constructor properties. It is important to do it like
-      // this because if we write 'CalculatorTPP.prototype' and then we
-      // override a method like below, the CalculatorTPP.prototype method
-      // would be changed (this side effect is not a good idea cause
-      // CalculatorTPP instances would get a new method implementation without
-      // being expected).
-      // Override CorruptCalculatorTPP’s properties that were inherited from
-      // CalculatorTPP.
-      CorruptCalculatorTPP.prototype.tag = 'CorruptCalculatorTPP';
-      CorruptCalculatorTPP.prototype.sum = function () {
-        return this.num1 + this.num2 + this.corruptIncrease;
-      };
-    }
+    CorruptCalculatorTPP.prototype = new CalculatorTPP();// Assigning
+    // 'new CalculatorTPP()' instead of 'CalculatorTPP.prototype' allows us 
+    // to inherit, not only the prototype properties but also the
+    // CalculatorTPP constructor properties. It is important to do it like
+    // this because if we write 'CalculatorTPP.prototype' and then we
+    // override a method like below, the CalculatorTPP.prototype method
+    // would be changed (this side effect is not a good idea cause
+    // CalculatorTPP instances would get a new method implementation without
+    // being expected).
+    // Override CorruptCalculatorTPP’s properties that were inherited from
+    // CalculatorTPP.
+    CorruptCalculatorTPP.prototype.tag = 'CorruptCalculatorTPP';
+    CorruptCalculatorTPP.prototype.sum = function () {
+      return this.num1 + this.num2 + this.corruptIncrease;
+    };
+  }
   // Below code is a much cleaner solution to extend a parent "Class".
   function extendParentClass1 () {
     function extend (parentClass, newProperties) {
