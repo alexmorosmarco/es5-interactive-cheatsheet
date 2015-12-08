@@ -44,6 +44,7 @@
  */
 function testInheritance () {
   // 1-Standard inheritance through prototype and Object.create()
+  var TAG = 'SI';
   // Parent class
   function Animal () {}
   Animal.prototype.legs = 4;
@@ -54,7 +55,7 @@ function testInheritance () {
     Animal.call(this);
   }
   // Step 1 - Define the inheritance chain
-  Human.prototype = Object.create(Animal.prototype); 
+  Human.prototype = Object.create(Animal.prototype);
   // Step 2 - Define the constructor property of the child class prototype [optional]
   Human.prototype.constructor = Human;
   // Step 3 - Define the properties of the child class
@@ -62,10 +63,9 @@ function testInheritance () {
   Human.prototype.arms = 2;
 
   var alex = new Human();
-
-  console.log(alex instanceof Human);
-  console.log(alex instanceof Animal);
-  console.log(alex instanceof Object);
+  writeToConsole(TAG, alex instanceof Human);
+  writeToConsole(TAG, alex instanceof Animal);
+  writeToConsole(TAG, alex instanceof Object);
 
   // 2-Setting prototype manually (THE PROTOTYPE PATTERN and inheritance, thus
   // using a constructor function and defining its prototype)
