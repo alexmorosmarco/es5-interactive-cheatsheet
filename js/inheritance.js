@@ -90,19 +90,26 @@ function testInheritance () {
 
   // Child class
   var CorruptCalculatorTPP = function (n1, n2) {
-    CalculatorTPP.call(this,n1,n2);
+    this.super.constructor.call(this,n1,n2);
+    // Alternative without the 'super' property
+    //CalculatorTPP.call(this,n1,n2);
     this.corruptIncrease = 100;
   };
   /**
-   * Extends from a parent class manually
+   * Extends from a parent class manually. The child class will have a "super"
+   * property with the parent class prototype as value so that we can call the
+   * "super" methods when we want.
    */
   function extendParentClass0 () {
     CorruptCalculatorTPP.prototype = Object.create(CalculatorTPP.prototype);
     CorruptCalculatorTPP.prototype.constructor = CorruptCalculatorTPP;
+    CorruptCalculatorTPP.prototype.super = CalculatorTPP.prototype;
     // Override properties that were inherited from CalculatorTPP
     CorruptCalculatorTPP.prototype.tag = 'CorruptCalculatorTPP';
     CorruptCalculatorTPP.prototype.sum = function () {
-      return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
+      return this.super.sum.call(this) + this.corruptIncrease;
+      // Alternative without the 'super' property
+      //return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
     };
   }
   /**
@@ -112,7 +119,9 @@ function testInheritance () {
     /**
      * Extends a childClass from a parentClass automatically setting the child
      * prototype and its constructor. The newProperties are defined in the new
-     * prototype of the child class.
+     * prototype of the child class. The child class will have a "super"
+     * property with the parent class prototype as value so that we can call the
+     * "super" methods when we want.
      *
      * -childClass: object constructor function of the child
      * -parentClass: object constructor function of the parent
@@ -122,6 +131,7 @@ function testInheritance () {
     function extend (childClass, parentClass, newProperties) {
       var newPrototype = Object.create(parentClass.prototype);
       newPrototype.constructor = childClass;
+      newPrototype.super = parentClass.prototype;
 
       var p;
       for (p in newProperties) {
@@ -132,7 +142,9 @@ function testInheritance () {
     extend(CorruptCalculatorTPP, CalculatorTPP, {
       tag: 'CorruptCalculatorTPP',
       sum: function () {
-        return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
+        return this.super.sum.call(this) + this.corruptIncrease;
+        // Alternative without the 'super' property
+        //return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
       }
     });
   }
