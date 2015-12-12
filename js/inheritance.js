@@ -12,36 +12,6 @@
  *  base prototype that inheriting prototypes can use, but the outside world
  *  can't).
  */
-
-/*  "Class" model to be implemented and analyzed using different programming
-    patterns.
-
-    Person: parent Class
-        //Private attributes
-        -name
-        -birthDate
-        -DNI
-        //Public attributes
-        //Private methods
-        //Public methods
-        +getName()
-        +getBirthDate()
-        +getDNI()
-        +getAge()//uses other public function: getBirthDate()
-        //Constructor: new Person(name,birthDate,DNI)
-
-    WorkerPerson (extends Person, child class)
-        //Public static vars
-        RETIREMENT_AGE = 65
-        //Private attributes
-        //Public attributes
-        +profession
-        +company
-        //Private methods
-        //Public methods
-        +getYearsToRetirement()//uses a parent public function: getAge()
-        //Constructor: call to Person constructor
- */
 function testInheritance () {
   // 1-Standard inheritance through prototype and Object.create()
   // Class definition using an "object constructor function" and defining public
@@ -180,8 +150,3 @@ function testInheritance () {
   }
   console.table(testEvaluations);
 }
-
-
-//TODO: pensar si con getter/setters ganamos algo para definir propiedades privadas contra funciones tipo getX()
-//TODO: intentar pensar soluciones para definir variables privadas
-//TODO: HACER LA HERENCIA PERO CON EL TRPP
