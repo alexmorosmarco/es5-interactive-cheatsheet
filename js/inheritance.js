@@ -1,51 +1,22 @@
 "use strict";
-/*  IMPORTANT NOTES ABOUT JAVASCRIPT AND INHERITANCE:
-    -Prototype based patterns allow to consume less memory, so that it lets
-    defining functions and properties in the prototype rather than in each
-    instance. So they will consume memory only once, in the prototype, and every
-    instance/object will have access to them so that every instance inherits
-    from the prototype.
-
-    -There's no way to implement "protected" attributes (create properties in a
-    base prototype that inheriting prototypes can use, but the outside world
-    can't).
-
-    -It is not possible for a child to invoke a parent method if the child
-    overrode that method. So there is no way to call something like
-    'super.method()'.
- */
-
-/*  "Class" model to be implemented and analyzed using different programming
-    patterns.
-
-    Person: parent Class
-        //Private attributes
-        -name
-        -birthDate
-        -DNI
-        //Public attributes
-        //Private methods
-        //Public methods
-        +getName()
-        +getBirthDate()
-        +getDNI()
-        +getAge()//uses other public function: getBirthDate()
-        //Constructor: new Person(name,birthDate,DNI)
-
-    WorkerPerson (extends Person, child class)
-        //Public static vars
-        RETIREMENT_AGE = 65
-        //Private attributes
-        //Public attributes
-        +profession
-        +company
-        //Private methods
-        //Public methods
-        +getYearsToRetirement()//uses a parent public function: getAge()
-        //Constructor: call to Person constructor
+/**
+ * IMPORTANT NOTES ABOUT JAVASCRIPT AND INHERITANCE:
+ *
+ * -Prototype based patterns allow to consume less memory, so that it lets
+ *  defining functions and properties in the prototype rather than in each
+ *  instance. So they will consume memory only once, in the prototype, and every
+ *  instance/object will have access to them so that every instance inherits
+ *  from the prototype.
+ *
+ * -There's no way to implement "protected" attributes (create properties in a
+ *  base prototype that inheriting prototypes can use, but the outside world
+ *  can't).
  */
 function testInheritance () {
   // 1-Standard inheritance through prototype and Object.create()
+  // Class definition using an "object constructor function" and defining public
+  // properties in its prototype
+  var TAG = 'SI';
   // Parent class
   function Animal () {}
   Animal.prototype.legs = 4;
@@ -56,7 +27,7 @@ function testInheritance () {
     Animal.call(this);
   }
   // Step 1 - Define the inheritance chain
-  Human.prototype = Object.create(Animal.prototype); 
+  Human.prototype = Object.create(Animal.prototype);
   // Step 2 - Define the constructor property of the child class prototype [optional]
   Human.prototype.constructor = Human;
   // Step 3 - Define the properties of the child class
@@ -64,102 +35,118 @@ function testInheritance () {
   Human.prototype.arms = 2;
 
   var alex = new Human();
+  writeToConsole(TAG, alex instanceof Human);
+  writeToConsole(TAG, alex instanceof Animal);
+  writeToConsole(TAG, alex instanceof Object);
 
-  console.log(alex instanceof Human);
-  console.log(alex instanceof Animal);
-  console.log(alex instanceof Object);
-
-  // 2-Setting prototype manually (THE PROTOTYPE PATTERN and inheritance, thus
-  // using a constructor function and defining its prototype)
-  // Parent "Class"
+  // 2-Standard inheritance through a function that does the "dirty work"
+  // Parent class
   var CalculatorTPP = function (n1, n2) {
-      // Public properties (unique to an object instance)
-      this.init(n1,n2);
-    };
-    CalculatorTPP.prototype = {
-      // Public properties/methods
-      tag: 'CalculatorTPP',
-      init: function (n1, n2) {
-        this.num1 = n1;
-        this.num2 = n2;
-      },
-      sum: function() {
-        return this.num1 + this.num2;
-      },
-      logSum: function () {
-        writeToConsole(this.tag + ': ' + this.sum());
-      }
-    };
-  // Child "Class"
-  var CorruptCalculatorTPP = function (n1, n2) {
+    // Public properties unique to an object instance
     this.init(n1,n2);
+  };
+  // Public properties
+  CalculatorTPP.prototype.tag = 'CalculatorTPP';
+  CalculatorTPP.prototype.init = function (n1, n2) {
+    this.num1 = n1;
+    this.num2 = n2;
+  };
+  CalculatorTPP.prototype.sum = function() {
+    return this.num1 + this.num2;
+  };
+  CalculatorTPP.prototype.logSum = function () {
+    writeToConsole(this.tag, this.sum());
+  };
+
+  // Child class
+  var CorruptCalculatorTPP = function (n1, n2) {
+    this.super.constructor.call(this,n1,n2);
+    // Alternative without the 'super' property
+    //CalculatorTPP.call(this,n1,n2);
     this.corruptIncrease = 100;
-  }
-  // Below code is the manual way of inheriting in JS.
+  };
+  /**
+   * Extends from a parent class manually. The child class will have a "super"
+   * property with the parent class prototype as value so that we can call the
+   * "super" methods when we want.
+   */
   function extendParentClass0 () {
-      CorruptCalculatorTPP.prototype = new CalculatorTPP();// Assigning
-      // 'new CalculatorTPP()' instead of 'CalculatorTPP.prototype' allows us 
-      // to inherit, not only the prototype properties but also the
-      // CalculatorTPP constructor properties. It is important to do it like
-      // this because if we write 'CalculatorTPP.prototype' and then we
-      // override a method like below, the CalculatorTPP.prototype method
-      // would be changed (this side effect is not a good idea cause
-      // CalculatorTPP instances would get a new method implementation without
-      // being expected).
-      // Override CorruptCalculatorTPP’s properties that were inherited from
-      // CalculatorTPP.
-      CorruptCalculatorTPP.prototype.tag = 'CorruptCalculatorTPP';
-      CorruptCalculatorTPP.prototype.sum = function () {
-        return this.num1 + this.num2 + this.corruptIncrease;
-      };
-    }
-  // Below code is a much cleaner solution to extend a parent "Class".
+    CorruptCalculatorTPP.prototype = Object.create(CalculatorTPP.prototype);
+    CorruptCalculatorTPP.prototype.constructor = CorruptCalculatorTPP;
+    CorruptCalculatorTPP.prototype.super = CalculatorTPP.prototype;
+    // Override properties that were inherited from CalculatorTPP
+    CorruptCalculatorTPP.prototype.tag = 'CorruptCalculatorTPP';
+    CorruptCalculatorTPP.prototype.sum = function () {
+      return this.super.sum.call(this) + this.corruptIncrease;
+      // Alternative without the 'super' property
+      //return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
+    };
+  }
+  /**
+   * Extends from a parent class through a function that does the dirty work
+   */
   function extendParentClass1 () {
-    function extend (parentClass, newProperties) {
-      var newPrototype = new parentClass();
+    /**
+     * Extends a childClass from a parentClass automatically setting the child
+     * prototype and its constructor. The newProperties are defined in the new
+     * prototype of the child class. The child class will have a "super"
+     * property with the parent class prototype as value so that we can call the
+     * "super" methods when we want.
+     *
+     * -childClass: object constructor function of the child
+     * -parentClass: object constructor function of the parent
+     * -newProperties: object with the properties to be added to the prototype
+     * of the child
+     */
+    function extend (childClass, parentClass, newProperties) {
+      var newPrototype = Object.create(parentClass.prototype);
+      newPrototype.constructor = childClass;
+      newPrototype.super = parentClass.prototype;
+
       var p;
       for (p in newProperties) {
         newPrototype[p] = newProperties[p];
       };
-      return newPrototype;
+      childClass.prototype = newPrototype;
     }
-    CorruptCalculatorTPP.prototype = extend(CalculatorTPP,{
+    extend(CorruptCalculatorTPP, CalculatorTPP, {
       tag: 'CorruptCalculatorTPP',
       sum: function () {
-        return this.num1 + this.num2 + this.corruptIncrease;
+        return this.super.sum.call(this) + this.corruptIncrease;
+        // Alternative without the 'super' property
+        //return CalculatorTPP.prototype.sum.call(this) + this.corruptIncrease;
       }
     });
   }
-  // Below code is the inverse of previous alternative. In this case the
-  // prototype is an Object whose prototype (__proto__) is the parent "Class".
-  // This solution is analog to the child "Class" prototype definition. It
-  // may give different results from previous solution when using methods like
-  // getPrototypeOf().
-  function extendParentClass2 () {
-    CorruptCalculatorTPP.prototype = {
-      tag: 'CorruptCalculatorTPP',
-      sum: function () {
-        return this.num1 + this.num2 + this.corruptIncrease;
-      }
-    };
-    CorruptCalculatorTPP.prototype.__proto__ = new CalculatorTPP();
+
+  // Tests
+  var testFunctions = [extendParentClass0, extendParentClass1];
+  var testFunction;
+  var i;
+  var testEvaluations = {};
+  var testEvaluation;
+  for (i in testFunctions) {
+    testFunction = testFunctions[i];
+    // Execute test
+    testFunction();
+    // Evaluate test
+    testEvaluation = {};
+    TAG = testFunction.name;
+    var corrCalcTPP = new CorruptCalculatorTPP(2,3);
+    testEvaluation['prototype > child'] = (CorruptCalculatorTPP.prototype).isPrototypeOf(corrCalcTPP);// true
+    testEvaluation['parent > child'] = (CalculatorTPP.prototype).isPrototypeOf(corrCalcTPP);// true
+    testEvaluation['Object > child'] = (Object.prototype).isPrototypeOf(corrCalcTPP);// true
+    testEvaluation['child num1 === 2'] = (corrCalcTPP.num1===2);// true
+    testEvaluation['child num2 === 3'] = (corrCalcTPP.num2===3);// true
+    testEvaluation['child sum === 105'] = (corrCalcTPP.sum()===105);// true
+    corrCalcTPP.logSum();// logs 105
+    var calcTPP = new CalculatorTPP(2,3);
+    testEvaluation['parent num1 === 2'] = (calcTPP.num1===2);// true
+    testEvaluation['parent num2 === 3'] = (calcTPP.num2===3);// true
+    testEvaluation['parent sum === 5'] = (calcTPP.sum()===5);// true
+    calcTPP.logSum();// logs 5
+    // Append test evaluation
+    testEvaluations[testFunction.name] = testEvaluation;
   }
-  extendParentClass1();
-  var corrCalcTPP = new CorruptCalculatorTPP(2,3);
-  writeToConsole(corrCalcTPP.tag,corrCalcTPP.num1);
-  writeToConsole(corrCalcTPP.tag,corrCalcTPP.corruptIncrease);
-  corrCalcTPP.logSum();
-  writeToConsole(corrCalcTPP.tag,(CorruptCalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));
-  writeToConsole(corrCalcTPP.tag,(CalculatorTPP.prototype).isPrototypeOf(corrCalcTPP));
-  writeToConsole(corrCalcTPP.tag,(Object.prototype).isPrototypeOf(corrCalcTPP));
-  var calcTPP = new CalculatorTPP(2,3);
-  writeToConsole(calcTPP.tag,calcTPP.num1);
-  writeToConsole(calcTPP.tag,calcTPP.corruptIncrease);// Will fail, not
-  // inherited
-  calcTPP.logSum();
+  console.table(testEvaluations);
 }
-
-
-//TODO: pensar si con getter/setters ganamos algo para definir propiedades privadas contra funciones tipo getX()
-//TODO: intentar pensar soluciones para definir variables privadas
-//TODO: HACER LA HERENCIA PERO CON EL TRPP
