@@ -19,15 +19,6 @@
   <body>
     <p class="briefing">Please, open the browser console to see the interaction responses</p>
     <section>
-      <h3>GIVE FEEDBACK TO THE USER</h3>
-      <p id="warnMessage">[Area to show messages]</p>
-      <button onclick="warnUserWithHTML()">Replacing HTML content</button>
-      <button onclick="warnUserWithAlert('Take care!')">Through an alert</button>
-      <button onclick="warnUserWithConfirmBox()">Through a "Confirm Box"</button>
-      <button onclick="warnUserWithPromptBox()">Through a "Prompt Box"</button>
-      <button onclick="writeToConsole('Warning the user via console')">Through the console</button>
-    </section>
-    <section>
       <h3>STATEMENTS</h3>
       <button onclick="testClosure()">Closures</button>
       <button onclick="testExceptions()">Exceptions</button>
@@ -51,6 +42,15 @@
       <div>
         <button onclick="xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
       </div>
+    </section>
+    <section>
+      <h3>GIVE FEEDBACK TO THE USER</h3>
+      <p id="warnMessage">[Area to show messages]</p>
+      <button onclick="warnUserWithHTML()">Replacing HTML content</button>
+      <button onclick="warnUserWithAlert('Take care!')">Through an alert</button>
+      <button onclick="warnUserWithConfirmBox()">Through a "Confirm Box"</button>
+      <button onclick="warnUserWithPromptBox()">Through a "Prompt Box"</button>
+      <button onclick="writeToConsole('Warning the user via console')">Through the console</button>
     </section>
     <section>
       <h3>COOKIES</h3>
