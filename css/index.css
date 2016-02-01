@@ -1,22 +1,44 @@
-h3, h4 {
+h3, h4, p {
   /* To avoid UA default stylesheet margins */
   margin: 0px;
 }
 
 body {
+  margin: 0px;
   background-color: lightseagreen;
   font-family: Arial, sans-serif;
 }
 
-.briefing {
+header {
+  padding: 8px;
+  /* Needed to center its child horizontally */
+  text-align: center;
+}
+
+header > p {
+  display: inline-block;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 5px 15px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+main {
+  padding: 8px;
+}
+
+p.briefing {
   font-style: italic;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 article {
-  border: 4px solid darkturquoise;
   border-radius: 6px;
-  padding: 5px;
+  padding: 8px;
   margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
@@ -38,4 +60,17 @@ article > section:last-child {
 
 article > section > h4 {
   margin-bottom: 5px;
+}
+
+footer {
+  padding: 12px 8px;
+  background-color: rgb(68, 68, 68);
+  color: rgb(208, 208, 208);
+  font-size: 13px;
+}
+
+footer a {
+  margin-top: 4px;
+  display: block;
+  color: rgb(208, 208, 208);
 }
