@@ -5,9 +5,9 @@
     <!-- viewport: 1px will mean a relative size to the current screen -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- theme-color (Chrome, Firefox OS, Opera): customize browser/OS colour -->
-    <meta name="theme-color" content="#20b2aa">
+    <meta name="theme-color" content="#2094F3">
     <!-- msapplication-navbutton-color (Windows Phone): customize browser/OS colour -->
-    <meta name="msapplication-navbutton-color" content="#20b2aa">
+    <meta name="msapplication-navbutton-color" content="#2094F3">
     <!-- apple-mobile-web-app-capable (iOS Safari): hides URL and bottom bar = "standalone mode" -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- apple-mobile-web-app-status-bar-style (iOS Safari): customize iOS Status Bar [default, black, black-translucent] -->
@@ -16,61 +16,68 @@
     <link rel="stylesheet" href="css/index.css">
   </head>
   <body>
-    <p class="briefing">Please, open the browser console to see the interaction responses</p>
-    <article>
-      <h3>The language</h3>
-      <section>
-        <h4>Statements</h4>
-        <button onclick="testClosure()">Closures</button>
-        <button onclick="testExceptions()">Exceptions</button>
-      </section>
-      <section>
-        <h4>Data types</h4>
-        <button onclick="testTypes()">Types and "typeof"</button>
-        <button onclick="testObjects()">Object constructors</button>
-        <button onclick="testPatterns()">OO Patterns</button>
-        <button onclick="testInheritance()">Inheritance</button>
-      </section>
-      <section>
-        <h4>Namespaces</h4>
-        <button id="btUseNamespace">Use code from a custom namespace</button>
-      </section>
-    </article>
-    <article>
-      <h3>Network</h3>
-      <section>
-        <h4>XMLHttpRequest</h4>
-        <button onclick="xhrSyncCORSFromDifferentOrigin()">Synchronous call from different Origin (will fail because of same-origin policy)</button>
-        <button onclick="xhrSyncCORSThroughReverseProxy()">Synchronous call using CORS Reverse Proxy</button>
-        <button onclick="xhrSyncCORSThroughReverseProxyWithPreflight()">Synchronous call using CORS Reverse Proxy with preflight</button>
-        <div>
-          <button onclick="xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
-        </div>
-      </section>
-    </article>
-    <article>
-      <h3>Browser</h3>
-      <section>
-        <h4>Give feedback to the user</h4>
-        <p id="warnMessage">[Area to show messages]</p>
-        <button onclick="warnUserWithHTML()">Replacing HTML content</button>
-        <button onclick="warnUserWithAlert('Take care!')">Through an alert</button>
-        <button onclick="warnUserWithConfirmBox()">Through a "Confirm Box"</button>
-        <button onclick="warnUserWithPromptBox()">Through a "Prompt Box"</button>
-        <button onclick="writeToConsole('Warning the user via console')">Through the console</button>
-      </section>
-      <section>
-        <h4>Cookies</h4>
-        <p id="cookieInfo">[Area to show cookies]</p>
-        <button onclick="readCookie()">Read cookies</button>
-        <button onclick="createCookie()">Create one cookie</button>
-        <button onclick="createCookie2()">Create one more cookie</button>
-      </section>
-      <section>
-        <h4>Navigation</h4>
-        <button onclick="gotoOtherSite()">Go to other site</button>
-      </section>
-    </article>
+    <header><p>ES5 interactive cheat sheet</p></header>
+    <main>
+      <p class="briefing">Please, open the browser console to see the interaction responses</p>
+      <article>
+        <h3>The language</h3>
+        <section>
+          <h4>Statements</h4>
+          <button onclick="testClosure()">Closures</button>
+          <button onclick="testExceptions()">Exceptions</button>
+        </section>
+        <section>
+          <h4>Data types</h4>
+          <button onclick="testTypes()">Types and "typeof"</button>
+          <button onclick="testObjects()">Object constructors</button>
+          <button onclick="testPatterns()">OO Patterns</button>
+          <button onclick="testInheritance()">Inheritance</button>
+        </section>
+        <section>
+          <h4>Namespaces</h4>
+          <button id="btUseNamespace">Use code from a custom namespace</button>
+        </section>
+      </article>
+      <article>
+        <h3>Network</h3>
+        <section>
+          <h4>XMLHttpRequest</h4>
+          <button onclick="xhrSyncCORSFromDifferentOrigin()">Synchronous call from different Origin (will fail because of same-origin policy)</button>
+          <button onclick="xhrSyncCORSThroughReverseProxy()">Synchronous call using CORS Reverse Proxy</button>
+          <button onclick="xhrSyncCORSThroughReverseProxyWithPreflight()">Synchronous call using CORS Reverse Proxy with preflight</button>
+          <div>
+            <button onclick="xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
+          </div>
+        </section>
+      </article>
+      <article>
+        <h3>Browser</h3>
+        <section>
+          <h4>Give feedback to the user</h4>
+          <p id="warnMessage">[Area to show messages]</p>
+          <button onclick="warnUserWithHTML()">Replacing HTML content</button>
+          <button onclick="warnUserWithAlert('Take care!')">Through an alert</button>
+          <button onclick="warnUserWithConfirmBox()">Through a "Confirm Box"</button>
+          <button onclick="warnUserWithPromptBox()">Through a "Prompt Box"</button>
+          <button onclick="writeToConsole('Warning the user via console')">Through the console</button>
+        </section>
+        <section>
+          <h4>Cookies</h4>
+          <p id="cookieInfo">[Area to show cookies]</p>
+          <button onclick="readCookie()">Read cookies</button>
+          <button onclick="createCookie()">Create one cookie</button>
+          <button onclick="createCookie2()">Create one more cookie</button>
+        </section>
+        <section>
+          <h4>Navigation</h4>
+          <button onclick="gotoOtherSite()">Go to other site</button>
+        </section>
+      </article>
+    </main>
+    <footer>
+      <p>By Alex Moros Marco</p>
+      <a href="https://github.com/alexmorosmarco">Check it on GitHub</a>
+    </footer>
     <!-- ECMAScript -->
     <script src="js/index.js"></script>
     <script src="js/feedback.js"></script>
