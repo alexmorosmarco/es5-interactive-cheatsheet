@@ -45,11 +45,11 @@
         <h3>Network</h3>
         <section>
           <h4>XMLHttpRequest</h4>
-          <button onclick="xhrSyncCORSFromDifferentOrigin()">Synchronous call from different Origin (will fail because of same-origin policy)</button>
-          <button onclick="xhrSyncCORSThroughReverseProxy()">Synchronous call using CORS Reverse Proxy</button>
-          <button onclick="xhrSyncCORSThroughReverseProxyWithPreflight()">Synchronous call using CORS Reverse Proxy with preflight</button>
+          <button onclick="Network.XHR.xhrSyncCORSFromDifferentOrigin()">Synchronous call from different Origin (will fail because of same-origin policy)</button>
+          <button onclick="Network.XHR.xhrSyncCORSThroughReverseProxy()">Synchronous call using CORS Reverse Proxy</button>
+          <button onclick="Network.XHR.xhrSyncCORSThroughReverseProxyWithPreflight()">Synchronous call using CORS Reverse Proxy with preflight</button>
           <div>
-            <button onclick="xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
+            <button onclick="Network.XHR.xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
           </div>
         </section>
       </article>
@@ -87,8 +87,8 @@
     <script src="js/language/Types.js"></script>
     <script src="js/language/Inheritance.js"></script>
     <script src="js/language/Namespaces.js"></script>
+    <script src="js/network/XHR.js"></script>
     <script src="js/feedback.js"></script>
-    <script src="js/xhr.js"></script>
     <script src="js/cookies.js"></script>
   </body>
 </html>
