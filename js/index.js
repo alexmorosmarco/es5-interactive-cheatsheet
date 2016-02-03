@@ -5,6 +5,7 @@
  *****************/
 (function() {
   function onLoaded() {
+    writeToConsole = Browser.Feedback.writeToConsole;
     writeToConsole('Loaded!!!');
     // Register events
     window.document.getElementById('btUseNamespace').onclick = function() {
@@ -24,3 +25,6 @@
 function gotoOtherSite() {
   location.href = "http://www.google.es"
 }
+
+/* "alias" for the namespace function */
+var writeToConsole;

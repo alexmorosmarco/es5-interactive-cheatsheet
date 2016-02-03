@@ -58,11 +58,11 @@
         <section>
           <h4>Give feedback to the user</h4>
           <p id="warnMessage">[Area to show messages]</p>
-          <button onclick="warnUserWithHTML()">Replacing HTML content</button>
-          <button onclick="warnUserWithAlert('Take care!')">Through an alert</button>
-          <button onclick="warnUserWithConfirmBox()">Through a "Confirm Box"</button>
-          <button onclick="warnUserWithPromptBox()">Through a "Prompt Box"</button>
-          <button onclick="writeToConsole('Warning the user via console')">Through the console</button>
+          <button onclick="Browser.Feedback.warnUserWithHTML()">Replacing HTML content</button>
+          <button onclick="Browser.Feedback.warnUserWithAlert('Take care!')">Through an alert</button>
+          <button onclick="Browser.Feedback.warnUserWithConfirmBox()">Through a "Confirm Box"</button>
+          <button onclick="Browser.Feedback.warnUserWithPromptBox()">Through a "Prompt Box"</button>
+          <button onclick="Browser.Feedback.writeToConsole('Warning the user via console')">Through the console</button>
         </section>
         <section>
           <h4>Cookies</h4>
@@ -88,7 +88,7 @@
     <script src="js/language/Inheritance.js"></script>
     <script src="js/language/Namespaces.js"></script>
     <script src="js/network/XHR.js"></script>
-    <script src="js/feedback.js"></script>
+    <script src="js/browser/Feedback.js"></script>
     <script src="js/cookies.js"></script>
   </body>
 </html>
