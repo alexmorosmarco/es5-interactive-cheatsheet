@@ -8,7 +8,7 @@
     writeToConsole('Loaded!!!');
     // Register events
     window.document.getElementById('btUseNamespace').onclick = function() {
-      useNamespace();
+      Language.Namespaces.Util.log('Namespace', 'using a custom namespace...');
     };
   }
   document.addEventListener('DOMContentLoaded', function(event) {
@@ -17,12 +17,7 @@
   // Worse alternative cause it replaces any previously registered listener
   //window.onload = onLoaded;
 }());
-/****************
- ** NAMESPACES **
- ****************/
-function useNamespace() {
-  Amm.Util.log('Namespace', 'using a custom namespace...');
-}
+
 /****************
  ** NAVIGATION **
  ****************/
