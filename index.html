@@ -23,15 +23,18 @@
         <h3>The language</h3>
         <section>
           <h4>Statements</h4>
-          <button onclick="testClosure()">Closures</button>
-          <button onclick="testExceptions()">Exceptions</button>
+          <button onclick="Language.Statements.testClosure()">Closures</button>
+          <button onclick="Language.Statements.testExceptions()">Exceptions</button>
         </section>
         <section>
           <h4>Data types</h4>
-          <button onclick="testTypes()">Types and "typeof"</button>
-          <button onclick="testObjects()">Object constructors</button>
-          <button onclick="testPatterns()">OO Patterns</button>
-          <button onclick="testInheritance()">Inheritance</button>
+          <button onclick="Language.Types.testTypes()">Types and "typeof"</button>
+          <button onclick="Language.Types.testObjects()">Object constructors</button>
+          <button onclick="Language.Types.testPatterns()">OO Patterns</button>
+        </section>
+        <section>
+          <h4>Inheritance</h4>
+          <button onclick="Language.Inheritance.testInheritance()">Inheritance</button>
         </section>
         <section>
           <h4>Namespaces</h4>
@@ -42,11 +45,11 @@
         <h3>Network</h3>
         <section>
           <h4>XMLHttpRequest</h4>
-          <button onclick="xhrSyncCORSFromDifferentOrigin()">Synchronous call from different Origin (will fail because of same-origin policy)</button>
-          <button onclick="xhrSyncCORSThroughReverseProxy()">Synchronous call using CORS Reverse Proxy</button>
-          <button onclick="xhrSyncCORSThroughReverseProxyWithPreflight()">Synchronous call using CORS Reverse Proxy with preflight</button>
+          <button onclick="Network.XHR.xhrSyncCORSFromDifferentOrigin()">Synchronous call from different Origin (will fail because of same-origin policy)</button>
+          <button onclick="Network.XHR.xhrSyncCORSThroughReverseProxy()">Synchronous call using CORS Reverse Proxy</button>
+          <button onclick="Network.XHR.xhrSyncCORSThroughReverseProxyWithPreflight()">Synchronous call using CORS Reverse Proxy with preflight</button>
           <div>
-            <button onclick="xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
+            <button onclick="Network.XHR.xhrAsyncCORSThroughReverseProxyWithPreflight()">Asynchronous call using CORS Reverse Proxy with preflight</button>
           </div>
         </section>
       </article>
@@ -55,22 +58,22 @@
         <section>
           <h4>Give feedback to the user</h4>
           <p id="warnMessage">[Area to show messages]</p>
-          <button onclick="warnUserWithHTML()">Replacing HTML content</button>
-          <button onclick="warnUserWithAlert('Take care!')">Through an alert</button>
-          <button onclick="warnUserWithConfirmBox()">Through a "Confirm Box"</button>
-          <button onclick="warnUserWithPromptBox()">Through a "Prompt Box"</button>
-          <button onclick="writeToConsole('Warning the user via console')">Through the console</button>
+          <button onclick="Browser.Feedback.warnUserWithHTML()">Replacing HTML content</button>
+          <button onclick="Browser.Feedback.warnUserWithAlert('Take care!')">Through an alert</button>
+          <button onclick="Browser.Feedback.warnUserWithConfirmBox()">Through a "Confirm Box"</button>
+          <button onclick="Browser.Feedback.warnUserWithPromptBox()">Through a "Prompt Box"</button>
+          <button onclick="Browser.Feedback.writeToConsole('Warning the user via console')">Through the console</button>
         </section>
         <section>
           <h4>Cookies</h4>
           <p id="cookieInfo">[Area to show cookies]</p>
-          <button onclick="readCookie()">Read cookies</button>
-          <button onclick="createCookie()">Create one cookie</button>
-          <button onclick="createCookie2()">Create one more cookie</button>
+          <button onclick="Browser.Cookies.readCookie()">Read cookies</button>
+          <button onclick="Browser.Cookies.createCookie()">Create one cookie</button>
+          <button onclick="Browser.Cookies.createCookie2()">Create one more cookie</button>
         </section>
         <section>
           <h4>Navigation</h4>
-          <button onclick="gotoOtherSite()">Go to other site</button>
+          <button onclick="Browser.Navigation.gotoOtherSite()">Go to other site</button>
         </section>
       </article>
     </main>
@@ -80,11 +83,13 @@
     </footer>
     <!-- ECMAScript -->
     <script src="js/index.js"></script>
-    <script src="js/feedback.js"></script>
-    <script src="js/objects.js"></script>
-    <script src="js/inheritance.js"></script>
-    <script src="js/amm/amm.js"></script>
-    <script src="js/xhr.js"></script>
-    <script src="js/cookies.js"></script>
+    <script src="js/language/Statements.js"></script>
+    <script src="js/language/Types.js"></script>
+    <script src="js/language/Inheritance.js"></script>
+    <script src="js/language/Namespaces.js"></script>
+    <script src="js/network/XHR.js"></script>
+    <script src="js/browser/Feedback.js"></script>
+    <script src="js/browser/Cookies.js"></script>
+    <script src="js/browser/Navigation.js"></script>
   </body>
 </html>
