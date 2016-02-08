@@ -33,6 +33,63 @@ Open your browser console before pressing any button in order you to see what's 
 
 Just in some cases I am using `console.table()` to better show the results. If you do not use a [compatible](https://developer.mozilla.org/en-US/docs/Web/API/Console/table#Browser_compatibility) browser, do not worry, the messages will just be logged in the normal way, but that's not fun :stuck_out_tongue_closed_eyes:.
 
+## Core concepts documentation
+### The "class" approach
+The approach is based on functions `prototype` property and Objects parent/prototype object. These are the clues:
+*	Every function F has a property named `prototype`. Its value by default is an object like `{"constructor": F}`, that is an object with one property named `constructor`, with the function itself as value.
+*	Every object instance has a property named `__proto__`. Its value is the prototype of the function that was used to construct it. It is also known as the property that informs the object instance “parent” or its “prototype object”. The only object not having parent/`__proto__` is `Object.prototype` cause it is the last one in every prototype chain; so its parent is `null`.
+*	An object instance inherits the properties of the prototype contained in its `__proto__` property, what means that when using a property of an object instance, first it is searched in the object instance and if not found it is searched in the `__proto__` of the object instance; so the prototype is the closest concept to the class of an object instance in other programming languages.
+*	A literal object instance (`var alex = {firstName: “Alex”, lastName: “Moros”}`) or a `new Object()` instance has `Object.prototype` as `__proto__`. So `alex.__proto__ == Object.prototype`.
+
+Here you can see a descriptive image that may help you to understand it:
+![prototype diagram](/res/images/prototype.png)
+
+
+#### The “constructor function” and “new” keyword
+We use this two things to use class behaviour.  
+_Example:_
+```javascript
+function Person (p_firstName, p_lastName) {
+  this.firstName = p_firstName;
+  this.lastName = p_lastName;
+}
+
+var alex = new Person(“Alex”, ”Moros”);
+```
+In the example the `this` keyword is used to create object properties and give them some value.
+
+_Explanation:_
+*	A **“constructor function”** is a normal function that is used to create an object instance via the syntax `new ConstructorFunction()`, which object will have the prototype of the constructor function as parent. Some examples are `new Object()` or `new Person()`. The function needs not to have a return statement or return something different than an object; otherwise the object returned by the return statement would be the new object returned and its parent would depend on how it was created inside the function.
+
+*	Steps that the `new` keyword does:
+ 1.	A new object is created like this:  
+`{__proto__: ConstructorFunction.prototype}`
+ 2.	The `ConstructorFunction` is executed having `this` as the previously new object created.
+ 3.	The new updated object is returned so its `__proto__` will inform who is its parent (the constructor function prototype).
+
+#### How to check the parent/prototype of an object
+There are different ways:
+*	`<some constructor function prototype>.isPrototypeOf(<object instance>)`: true if that prototype is in the prototype chain of the instance; so it also looks in the parent of the parents.
+*	`<object instance> instance of <some constructor function>`: it is equivalent to previous way.
+*	`Object.getPrototypeOf(<object instance>)`: returns the prototype/parent object of the instance.
+*	`<object instance>.__proto__`: allowed since ES 2015 and supported by all browsers. It contains the prototype of the constructor function. It is equivalent to previous way.
+
+_Example:_
+```javascript
+function Person () {}
+var alex = new Person();
+
+// checks
+console.log(Person.prototype.isPrototypeOf(alex)); //returns true
+console.log(Object.prototype.isPrototypeOf(alex)); //returns true
+console.log(alex instanceof Person); //returns true
+console.log(alex instanceof Object); //returns true
+console.log(Object.getPrototypeOf(alex) === Person.prototype); //returns true
+console.log(Object.getPrototypeOf(alex) === Object.prototype); //returns false
+console.log(alex.__proto__ === Person.prototype); //returns true
+console.log(alex.__proto__ === Object.prototype); //returns false
+```
+
 ## Credits
 Thanks to all of these guys/teams for their sites and documentation:
 * [Douglas Crockford](http://javascript.crockford.com/)
