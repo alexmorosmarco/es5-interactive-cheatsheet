@@ -1,6 +1,5 @@
 # ES5 interactive cheat sheet
 
-## Introduction
 Nowadays there are so many JS frameworks that do the magic for us that finally we get disconnected in some way from what is really happening down there. That and my curiosity made that I didn't find enough just using a framework/technology and that I wanted to understand some of the inner parts of what ES5 provides.
 
 So this project is the result of a big personal research on different **ES5** topics where I wanted to go deeper. Main topic I was interested in at the beginning was the _"class"_ approach (based on the `prototype` property of functions) and _"inheritance"_. My research on both fields took me to some other really interesting topics that I recommend having a look:
@@ -16,7 +15,7 @@ Besides that, my research also went in other directions like using the native XH
 
 This project is currently finished according to what I wanted to understand at this point. But I will add new more topics as soon as I go over them.
 
-## How to use it
+# How to use it
 Just go to http://alexmorosmarco.github.io/es5-interactive-cheatsheet and have fun.
 
 The actions triggered by the buttons are self explanatory, so each button name tells you the general concept of the test.
@@ -25,16 +24,16 @@ But you definitely will want to see the code that the button action launches, so
 
 The decision of using inline declarations for the button events came just to make the tests easier to follow; so please do not blame on me, :wink:.
 
-### Documentation
+## Documentation
 Most important snippets are documented on code but, as an additional support, you can find below some good documentation of the core concepts I found during my research.
 
-### Advices
+## Advices
 Open your browser console before pressing any button in order you to see what's happening, so that every button action is printing out result logs to the console; that will help you follow the code.
 
 Just in some cases I am using `console.table()` to better show the results. If you do not use a [compatible](https://developer.mozilla.org/en-US/docs/Web/API/Console/table#Browser_compatibility) browser, do not worry, the messages will just be logged in the normal way, but that's not fun :stuck_out_tongue_closed_eyes:.
 
-## Core concepts documentation
-### The "class" approach
+# Core concepts documentation
+## The "class" approach
 The approach is based on functions `prototype` property and Objects parent/prototype object. These are the clues:
 *	Every function F has a property named `prototype`. Its value by default is an object like `{"constructor": F}`, that is an object with one property named `constructor`, with the function itself as value.
 *	Every object instance has a property named `__proto__`. Its value is the prototype of the function that was used to construct it. It is also known as the property that informs the object instance “parent” or its “prototype object”. The only object not having parent/`__proto__` is `Object.prototype` cause it is the last one in every prototype chain; so its parent is `null`.
@@ -45,7 +44,7 @@ Here you can see a descriptive image that may help you to understand it:
 ![prototype diagram](/res/images/prototype.png)
 
 
-#### The “constructor function” and “new” keyword
+### The “constructor function” and “new” keyword
 We use this two things to use class behaviour.  
 _Example:_
 ```javascript
@@ -67,7 +66,7 @@ _Explanation:_
  2.	The `ConstructorFunction` is executed having `this` as the previously new object created.
  3.	The new updated object is returned so its `__proto__` will inform who is its parent (the constructor function prototype).
 
-#### How to check the parent/prototype of an object
+### How to check the parent/prototype of an object
 There are different ways:
 *	`<some constructor function prototype>.isPrototypeOf(<object instance>)`: true if that prototype is in the prototype chain of the instance; so it also looks in the parent of the parents.
 *	`<object instance> instance of <some constructor function>`: it is equivalent to previous way.
@@ -90,7 +89,7 @@ console.log(alex.__proto__ === Person.prototype); //returns true
 console.log(alex.__proto__ === Object.prototype); //returns false
 ```
 
-### Inheritance
+## Inheritance
 Please note that in ES5 we do not have the concept of “class”, everything are objects, but calling it that way helps to understand how ES can emulate classes and inheritance.
 
 Steps to get inheritance:
@@ -134,7 +133,7 @@ console.log(alex instanceof Animal); //returns true
 console.log(alex instanceof Object); //returns true
 ```
 
-## Credits
+# Credits
 Thanks to all of these guys/teams for their sites and documentation:
 * [Douglas Crockford](http://javascript.crockford.com/)
 * [Quirks Mode](http://www.quirksmode.org/js/contents.html)
