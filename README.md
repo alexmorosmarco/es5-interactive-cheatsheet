@@ -90,6 +90,50 @@ console.log(alex.__proto__ === Person.prototype); //returns true
 console.log(alex.__proto__ === Object.prototype); //returns false
 ```
 
+### Inheritance
+Please note that in ES5 we do not have the concept of “class”, everything are objects, but calling it that way helps to understand how ES can emulate classes and inheritance.
+
+Steps to get inheritance:
+
+* **Step 1 - Define the inheritance chain:** cleanest way to get inheritance, so to create a child class inheriting from other parent class, is to use the `prototype` property of a function to link the child class to the “parent” class and to use the constructor `Object.create(<prototype of the parent>)` to create the new object of the parent class that will be the prototype of the child class. The returned object will just be a new object having as parent the given prototype.
+
+ If we see the example, instead of defining the inheritance through above way, we could have done `Human.prototype = new Animal();` but, even though this does not represent a problem for the inheritance, it is not so clean. If we do that the prototype of the child class is an instance of the parent class so then if we add new properties to the child's prototype it is like the parent has the child’s properties. It is better to do it through the `Object.create()` way so that then we have the child’s prototype as a basic object with the parent’s prototype.
+
+ What is never a good idea is to do `Human.prototype = Animal.prototype;` cause any property we later add to the child’s prototype is being added to the parent’s prototype or, what is worse if the property already existed in the parent, it will override the parent’s property.
+
+* **Step 2 - Define the constructor property of the child class prototype [optional]:** the new object created through `Object.create(<prototype of the parent>)` does not have a “constructor” property so it is a good practice to define it to be the constructor function of the child class. This way it contains the true constructor function that is used to create instances of the child class.
+
+* **Step 3 - Define the properties of the child class:** after doing this we can add to the `prototype` of the child’s class any new property that we want in its class. This can also be done through the second parameter of `Object.create(<prototype of the parent>, <property descriptors>)`, which is property descriptors, but the grammar is too big compared to the benefit it can give us (defining the property descriptors: value, writable, enumerable and configurable).
+
+* **Step 4 - Call parent’s constructor if needed:** if needed, call the constructor of the parent class. We do it through the functions `call` or `apply` of every function, which allow setting their internal `this` property to the first argument we give to them. We can also give arguments to that function through `F.call(<new this>, <argument1, argument2, ...>)` or through `F.apply(<new this>, <array with the arguments>)`.
+
+_Example:_
+
+```javascript
+// Parent class
+function Animal () {}
+Animal.prototype.legs = 4;
+
+// Child class
+function Human () {
+  // Step 4 - Call parent’s constructor if needed
+  Animal.call(this);
+}
+// Step 1 - Define the inheritance chain
+Human.prototype = Object.create(Animal.prototype);
+// Step 2 - Define the constructor property of the child class prototype [optional]
+Human.prototype.constructor = Human;
+// Step 3 - Define the properties of the child class
+Human.prototype.legs = 2;
+Human.prototype.arms = 2;
+
+var alex = new Human();
+
+console.log(alex instanceof Human); //returns true
+console.log(alex instanceof Animal); //returns true
+console.log(alex instanceof Object); //returns true
+```
+
 ## Credits
 Thanks to all of these guys/teams for their sites and documentation:
 * [Douglas Crockford](http://javascript.crockford.com/)
