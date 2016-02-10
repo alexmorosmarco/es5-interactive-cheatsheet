@@ -1,5 +1,9 @@
 //Start in strict mode so that non-defined variables give an error.
 "use strict";
+
+// "alias" for the namespace function
+var writeToConsole;
+
 /*****************
  ** APP STARTUP **
  *****************/
@@ -18,5 +22,3 @@
   // Worse alternative cause it replaces any previously registered listener
   //window.onload = onLoaded;
 }());
-/* "alias" for the namespace function */
-var writeToConsole;
