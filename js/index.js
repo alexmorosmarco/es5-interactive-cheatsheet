@@ -10,7 +10,7 @@ var writeToConsole;
 (function() {
   function onLoaded() {
     writeToConsole = Browser.Feedback.writeToConsole;
-    writeToConsole('Loaded!!!');
+    writeToConsole("timestamp=" + Date.now() + " - Loaded!!!");
     // Register events
     window.document.getElementById('btUseNamespace').onclick = function() {
       Language.Namespaces.Util.log('Namespace', 'using a custom namespace...');
