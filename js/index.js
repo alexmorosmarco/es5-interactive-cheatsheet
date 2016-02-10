@@ -1,4 +1,4 @@
-//Start in strict mode so that non-defined variables give an error.
+// Start in strict mode so that non-defined variables give an error.
 "use strict";
 
 // "alias" for the namespace function
