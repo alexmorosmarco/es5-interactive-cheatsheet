@@ -18,13 +18,5 @@
   // Worse alternative cause it replaces any previously registered listener
   //window.onload = onLoaded;
 }());
-
-/****************
- ** NAVIGATION **
- ****************/
-function gotoOtherSite() {
-  location.href = "http://www.google.es"
-}
-
 /* "alias" for the namespace function */
 var writeToConsole;
