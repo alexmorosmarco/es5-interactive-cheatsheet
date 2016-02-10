@@ -1,12 +1,16 @@
-//Start in strict mode so that non-defined variables give an error.
+// Start in strict mode so that non-defined variables give an error.
 "use strict";
+
+// "alias" for the namespace function
+var writeToConsole;
+
 /*****************
  ** APP STARTUP **
  *****************/
 (function() {
   function onLoaded() {
     writeToConsole = Browser.Feedback.writeToConsole;
-    writeToConsole('Loaded!!!');
+    writeToConsole("timestamp=" + Date.now() + " - Loaded!!!");
     // Register events
     window.document.getElementById('btUseNamespace').onclick = function() {
       Language.Namespaces.Util.log('Namespace', 'using a custom namespace...');
@@ -18,13 +22,3 @@
   // Worse alternative cause it replaces any previously registered listener
   //window.onload = onLoaded;
 }());
-
-/****************
- ** NAVIGATION **
- ****************/
-function gotoOtherSite() {
-  location.href = "http://www.google.es"
-}
-
-/* "alias" for the namespace function */
-var writeToConsole;
