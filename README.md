@@ -1,5 +1,16 @@
 # ES5 interactive cheat sheet
 
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73719182-1', 'auto');
+  ga('send', 'pageview', '/readme');
+</script>
+
 Nowadays there are so many JS frameworks that do the magic for us that finally we get disconnected in some way from what is really happening down there. That and my curiosity made that I didn't find enough just using a framework/technology and that I wanted to understand some of the inner parts of what ES5 provides.
 
 So this project is the result of a big personal research on different **ES5** topics where I wanted to go deeper. Main topic I was interested in at the beginning was the _"class"_ approach (based on the `prototype` property of functions) and _"inheritance"_. My research on both fields took me to some other really interesting topics that I recommend having a look:
