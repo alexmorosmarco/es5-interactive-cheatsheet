@@ -1,4 +1,5 @@
 # ES5 interactive cheat sheet
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/alexmorosmarco/es5-interactive-cheatsheet/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Nowadays there are so many JS frameworks that do the magic for us that finally we get disconnected in some way from what is really happening down there. That and my curiosity made that I didn't find enough just using a framework/technology and that I wanted to understand some of the inner parts of what ES5 provides.
 
